@@ -1,17 +1,17 @@
 import express from 'express';
 import { 
-  // Legacy Controllers
+  
   listFeedbacks, 
   createFeedback, 
   respond,
 
-  // New Feedback Session Controllers
+  
   sendFeedbackRequest, 
   getPendingRequests, 
   submitFeedbackResponse, 
   getFeedbackHistory,
 
-  // New Global Template Controllers
+  
   getTemplates, 
   saveTemplates
 } from '../controllers/feedbackController.js';
@@ -23,9 +23,9 @@ const router = express.Router();
 /* ==========================================================================
    LEGACY ROUTES (Keep for backward compatibility if needed)
    ========================================================================== */
-router.get('/', auth, permit(['doctor','therapist']), listFeedbacks);
+router.get('/', auth, permit(['therapist']), listFeedbacks);
 router.post('/', createFeedback);
-router.put('/:id/respond', auth, permit(['doctor','therapist']), respond);
+router.put('/:id/respond', auth, permit(['therapist']), respond);
 
 
 /* ==========================================================================

@@ -1,4 +1,4 @@
-// finalbackend/models/Request.js
+
 import mongoose from 'mongoose';
 
 const requestSchema = new mongoose.Schema({
@@ -19,10 +19,9 @@ const requestSchema = new mongoose.Schema({
   urgency: { type: String, enum: ['low','moderate','high'], default: 'moderate' },
   sessionFee: { type: Number, default: 0 },
   notes: String,
-  // IMPORTANT: store as refs so populate works
+  
   patientId: { type: mongoose.Schema.Types.ObjectId, ref: 'Patient', default: null },
   therapistId: { type: mongoose.Schema.Types.ObjectId, ref: 'Therapist', default: null },
-  assignedDoctor: { type: mongoose.Schema.Types.ObjectId, ref: 'Doctor', default: null },
 }, { timestamps: true });
 
 export default mongoose.model('Request', requestSchema);

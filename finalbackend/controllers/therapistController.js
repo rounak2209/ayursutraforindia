@@ -1,8 +1,8 @@
-// controllers/therapistController.js
+
 import Therapist from "../models/Therapist.js";
 import bcrypt from "bcryptjs";
  
-// 🔹 Utility: generate time slots dynamically
+//  Utility: generate time slots dynamically
 function generateTimeSlots(startTime, endTime, duration = 60) {
   if (!startTime || !endTime) return [];
 
@@ -44,19 +44,19 @@ export const list = async (req, res) => {
 
     const docs = await Therapist.find(q).select("-password -__v").lean();
 
-const result = docs.map(t => ({
-  ...t,
-  timeSlots: generateTimeSlots(
-    t.startTime,
-    t.endTime,
-    t.sessionDuration || 60
-  )
-}));
+    const result = docs.map(t => ({
+      ...t,
+      timeSlots: generateTimeSlots(
+        t.startTime,
+        t.endTime,
+        t.sessionDuration || 60
+      )
+    }));
 
-return res.json(result);
+    return res.json(result);
 
   } catch (err) {
-    console.error("therapistController.list:", err);
+    console.error("❌ Error in list Therapists:", err.message);
     return res.status(500).json({ message: "Server error" });
   }
 };
@@ -68,7 +68,7 @@ export const getOne = async (req, res) => {
     if (!t) return res.status(404).json({ message: "Not found" });
     return res.json(t);
   } catch (err) {
-    console.error("therapistController.getOne:", err);
+    console.error("❌ Error in getOne Therapist:", err.message);
     return res.status(500).json({ message: "Server error" });
   }
 };
@@ -82,14 +82,14 @@ export const create = async (req, res) => {
       data.password = await bcrypt.hash(data.password, SALT_ROUNDS);
     }
 
-    // avoid accidental clients setting admin/role
+    // avoid accidental clients setting role
     delete data.role;
-    delete data.isAdmin;
+
 
     const t = await Therapist.create(data);
     return res.status(201).json({ id: t._id });
   } catch (err) {
-    console.error("therapistController.create:", err);
+    console.error("❌ Error in create Therapist:", err.message);
     // duplicate key error handling (email)
     if (err.code === 11000) return res.status(409).json({ message: "Duplicate key" });
     return res.status(500).json({ message: "Server error" });
@@ -105,12 +105,10 @@ export const update = async (req, res) => {
     const requesterId = req.user.id;
     const requesterRole = req.user.role;
 
-    if (requesterRole !== "admin" && requesterId !== targetId) {
-      return res.status(403).json({ message: "Forbidden" });
-    }
+   
 
     // block dangerous updates from generic update
-    const forbidden = ["_id", "id", "email", "password", "role", "isAdmin"];
+    const forbidden = ["_id", "id", "email", "password", "role", ];
     const updates = {};
     Object.keys(req.body || {}).forEach((k) => {
       if (!forbidden.includes(k)) updates[k] = req.body[k];
@@ -120,7 +118,7 @@ export const update = async (req, res) => {
     if (!updated) return res.status(404).json({ message: "Therapist not found" });
     return res.json(updated);
   } catch (err) {
-    console.error("therapistController.update:", err);
+    console.error("❌ Error in update Therapist:", err.message);
     return res.status(500).json({ message: "Server error" });
   }
 };
@@ -131,20 +129,16 @@ export const updateProfile = async (req, res) => {
 
     const targetId = req.params.id;
     const requesterId = req.user.id;
-    const requesterRole = req.user.role;
+    
+    
 
-    if (requesterRole !== "admin" && requesterId !== targetId) {
-      return res.status(403).json({ message: "Forbidden" });
-    }
-
-    // Only allow the fields used in profile editing
+    const updates = {};
     const allowed = [
       "name",
-      "therapyType",
       "specializations",
+      "therapyDurations",
       "workingDays",
       "startTime",
-      "sessionDuration",
       "endTime",
       "phone",
       "money",
@@ -152,20 +146,39 @@ export const updateProfile = async (req, res) => {
       "profileStatus",
       "location",
       "experience",
-      "timeSlots",
       "unavailableDates",
     ];
 
-    const updates = {};
+    //  Handle File Upload (Profile Pic)
+    if (req.file) {
+        updates.profilePic = req.file.path; // Cloudinary URL
+    }
+
+    // Handle Text Fields (From FormData or JSON)
     allowed.forEach((k) => {
-      if (req.body[k] !== undefined) updates[k] = req.body[k];
+      if (req.body[k] !== undefined) {
+          // If coming from FormData, complex fields might be JSON strings
+          if (["specializations", "workingDays", "therapyDurations", "unavailableDates"].includes(k) && typeof req.body[k] === 'string') {
+              try {
+                  updates[k] = JSON.parse(req.body[k]);
+              } catch (e) {
+                  updates[k] = req.body[k]; // Fallback
+              }
+          } else {
+              updates[k] = req.body[k];
+          }
+      }
     });
 
-    const updated = await Therapist.findByIdAndUpdate(targetId, { $set: updates }, { new: true, runValidators: true }).select("-password -__v");
-    if (!updated) return res.status(404).json({ message: "Not found" });
+    const updated = await Therapist.findByIdAndUpdate(
+      targetId,
+      { $set: updates },
+      { new: true, runValidators: true }
+    );
+
     return res.json(updated);
   } catch (err) {
-    console.error("therapistController.updateProfile:", err);
+    console.error("❌ Error in updateProfile Therapist:", err.message);
     return res.status(500).json({ message: "Server error" });
   }
 };

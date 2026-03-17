@@ -9,61 +9,83 @@ import {
 } from "../controllers/patientController.js";
 import Patient from "../models/Patient.js";
 
+import { upload } from "../config/cloudinary.js"; 
+
 const router = express.Router();
 
 /* ===========================
    🔹 Standard CRUD Routes
 =========================== */
-
-// Doctors/Therapists can view all patients
-router.get("/", auth, permit(["doctor", "therapist"]), list);
-
-// Get single patient (authenticated)
+router.get("/", auth, permit([ "therapist"]), list);
 router.get("/:id", auth, getOne);
-
-// Create new patient (used during registration)
 router.post("/", create);
-
-// Update patient (authenticated)
 router.put("/:id", auth, update);
 
-// Delete patient (doctor only)
-router.delete("/:id", auth, permit(["doctor"]), remove);
-
 /* ===========================
-   🔹 Profile Completion APIs
+   🔹 Profile Completion APIs (With File Upload)
 =========================== */
 
-// ✅ Fetch patient profile by ID (for dashboard load)
 router.get("/profile/:id", async (req, res) => {
   try {
     const patient = await Patient.findById(req.params.id);
-    if (!patient)
-      return res.status(404).json({ message: "Patient not found" });
+    if (!patient) return res.status(404).json({ message: "Patient not found" });
     res.json(patient);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
 
-// ✅ Update or complete profile
-router.put("/profile/:id", async (req, res) => {
-  try {
-    const updated = await Patient.findByIdAndUpdate(
-      req.params.id,
-      { ...req.body, profileStatus: "completed" },
-      { new: true }
-    );
-    if (!updated)
-      return res.status(404).json({ message: "Patient not found" });
-    res.json({
-      message: "Profile updated successfully",
-      patient: updated
-    });
-  } catch (err) {
-    console.error("Error updating patient:", err);
-    res.status(500).json({ message: err.message });
+//  UPDATE PROFILE + UPLOAD (Image & PDF)
+router.put(
+  "/profile/:id",
+  upload.fields([
+    { name: "profilePic", maxCount: 1 }, 
+    { name: "prescriptions", maxCount: 5 } 
+  ]),
+  async (req, res) => {
+    try {
+      const updateData = { ...req.body, profileStatus: "completed" };
+
+      // 1. Handle Profile Picture
+      if (req.files && req.files["profilePic"]) {
+        updateData.profilePic = req.files["profilePic"][0].path; // Cloudinary URL
+      }
+
+      // 2. Handle Prescriptions (PDFs)
+      if (req.files && req.files["prescriptions"]) {
+        
+        // Yahan hum naye URLs ka array bana rahe hain
+        const newDocs = req.files["prescriptions"].map((file) => file.path);
+        
+        // Agar database me push karna hai ($addToSet use karein taaki duplicate na ho)
+        
+        updateData.prescriptionDetails = { 
+           ...(updateData.prescriptionDetails || {}), 
+           documents: newDocs 
+        };
+      }
+
+      // 3. Update Database
+      const updated = await Patient.findByIdAndUpdate(
+        req.params.id,
+        
+        
+        { $set: updateData },
+        { new: true }
+      );
+
+      if (!updated)
+        return res.status(404).json({ message: "Patient not found" });
+
+      res.json({
+        message: "Profile updated successfully with files",
+        patient: updated
+      });
+    } catch (err) {
+      console.error("Error updating patient:", err);
+      res.status(500).json({ message: err.message });
+    }
   }
-});
+);
 
 export default router;

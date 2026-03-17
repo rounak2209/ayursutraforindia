@@ -1,4 +1,4 @@
-// finalbackend/controllers/progressResponseController.js
+
 import ProgressResponse from "../models/ProgressResponse.js";
 import AssignedTherapy from "../models/AssignedTherapy.js"; 
 import TherapyQuestion from "../models/TherapyQuestion.js";
@@ -19,8 +19,8 @@ export const sendQuestions = async (req, res) => {
     const today = new Date();
     const dateString = today.toISOString().split("T")[0];
 
-    // 🔴 REMOVED: await ProgressResponse.deleteMany(...) 
-    // We now KEEP old data so it doesn't disappear from the UI.
+    
+    
 
     // Fetch therapist's saved questions for this therapy
     const tqDoc = await TherapyQuestion.findOne({ therapistId, therapyType }).lean();
@@ -51,8 +51,8 @@ export const sendQuestions = async (req, res) => {
 
     return res.status(201).json(responseDoc);
   } catch (err) {
-    console.error("sendQuestions error:", err);
-    return res.status(500).json({ message: "Server error", detail: err.message });
+    console.error("❌ Error in sendQuestions:", err.message);
+    return res.status(500).json({ message: "Server error occurred while sending questions." });
   }
 };
 
@@ -69,8 +69,8 @@ export const getTodaysQuestions = async (req, res) => {
 
     return res.json(docs);
   } catch (err) {
-    console.error("getTodaysQuestions error:", err);
-    return res.status(500).json({ message: "Server error", detail: err.message });
+    console.error("❌ Error in getTodaysQuestions:", err.message);
+    return res.status(500).json({ message: "Server error occurred while fetching questions." });
   }
 };
 
@@ -154,12 +154,12 @@ export const submitAnswers = async (req, res) => {
         await assigned.save();
       }
     } catch (e) {
-      console.warn("Failed to update AssignedTherapy counters:", e);
+      console.warn("⚠️ Failed to update AssignedTherapy counters:", e.message);
     }
 
     return res.json(doc);
   } catch (err) {
-    console.error("submitAnswers error:", err);
-    return res.status(500).json({ message: "Server error", detail: err.message });
+    console.error("❌ Error in submitAnswers:", err.message);
+    return res.status(500).json({ message: "Server error occurred while submitting answers." });
   }
 };

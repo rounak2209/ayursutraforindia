@@ -1,9 +1,8 @@
-// controllers/authController.js
+
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import Patient from '../models/Patient.js';
-import Doctor from '../models/Doctor.js';
 import Therapist from '../models/Therapist.js';
 
 dotenv.config();
@@ -20,11 +19,6 @@ export const register = async (req, res) => {
       const p = await Patient.create({ name, email, password: hashed, ...extra });
       return res.status(201).json({ message: 'Patient created', id: p._id, profileStatus: p.profileStatus || 'incomplete' });
     }
-    if (role === 'doctor') {
-      if (await Doctor.findOne({ email })) return res.status(400).json({ message: 'Email exists' });
-      const d = await Doctor.create({ name, email, password: hashed, ...extra });
-      return res.status(201).json({ message: 'Doctor created', id: d._id, profileStatus: d.profileStatus || 'incomplete' });
-    }
     if (role === 'therapist') {
       if (await Therapist.findOne({ email })) return res.status(400).json({ message: 'Email exists' });
       const t = await Therapist.create({ name, email, password: hashed, ...extra });
@@ -32,23 +26,26 @@ export const register = async (req, res) => {
     }
     return res.status(400).json({ message: 'Bad role' });
   } catch (err) {
-    return res.status(500).json({ message: err.message });
+    console.error("❌ Auth Error:", err.message); 
+    return res.status(500).json({ message: "Server error occurred. Please try again." }); 
   }
 };
 
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
+    const cleanEmail = email.trim().toLowerCase(); 
     const user =
-      (await Patient.findOne({ email })) ||
-      (await Doctor.findOne({ email })) ||
-      (await Therapist.findOne({ email }));
+  (await Patient.findOne({ email: cleanEmail })) ||
+  (await Therapist.findOne({ email: cleanEmail }));
+    
+    
     if (!user) return res.status(404).json({ message: 'User not found' });
     const valid = await bcrypt.compare(password, user.password);
     if (!valid) return res.status(400).json({ message: 'Invalid credentials' });
 
     let role = 'patient';
-    if (user.constructor && user.constructor.modelName === 'Doctor') role = 'doctor';
+
     if (user.constructor && user.constructor.modelName === 'Therapist') role = 'therapist';
 
     const token = sign({ id: user._id, role });

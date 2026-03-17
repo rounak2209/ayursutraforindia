@@ -1,42 +1,44 @@
-// controllers/therapistExtraController.js
-import Request from "../models/Request.js";
-import Patient from "../models/Patient.js";
-import Therapist from "../models/Therapist.js";
+
+import AssignedTherapy from "../models/AssignedTherapy.js";
 
 /**
- * Return accepted requests for therapist :id mapped to a simple shape
- * [
- *   { requestId, status, patient: {...}, therapist: {...}, therapyType }
- * ]
+ * Return active patients for therapist :id
+ * NOW: Fetches from AssignedTherapy (Direct Booking) instead of Requests
  */
 export const getAcceptedPatientsForTherapist = async (req, res) => {
   try {
     const therapistId = req.params.id;
-    // only accepted
-    const docs = await Request.find({ assignedTherapist: therapistId, status: "accepted" })
-      .populate({ path: "patientId", select: "name email personalDetails healthProfile prescriptionDetails assignedTherapists assignedTherapist" })
-      .lean();
+    
+    // Find all active/scheduled therapies for this therapist
+    const docs = await AssignedTherapy.find({ 
+      therapistId: therapistId, 
+      status: { $in: ["scheduled", "ongoing", "in-progress", "completed"] } 
+    })
+    .populate({ 
+      path: "patientId", 
+      select: "name email personalDetails healthProfile prescriptionDetails assignedTherapists assignedTherapist" 
+    })
+    .sort({ startDate: -1 })
+    .lean();
 
     const result = (docs || []).map(d => ({
-  requestId: d._id,
-  status: d.status,
-  therapyType: d.therapyType || d.problem || d.requestedTherapy || "—",
+      requestId: d._id, // Frontend uses this as key
+      status: d.status,
+      therapyType: d.therapy || "—", // Schema field is 'therapy'
 
-  patient: d.patientId || null,
-  therapist: d.assignedTherapist || null,
+      patient: d.patientId || null,
+      therapist: d.therapistId || null,
 
-  appointmentDate: d.appointmentDateString || null,
-  appointmentTime: d.appointmentTime || null
-}));
-
-console.log(
-  "ACCEPTED PATIENT API RESPONSE:",
-  JSON.stringify(result, null, 2)
-);
+      //  FIX: Map Date to String format for frontend
+      appointmentDate: d.startDate ? new Date(d.startDate).toISOString().split("T")[0] : null,
+      
+      //  FIX: Extract first time slot from array
+      appointmentTime: (d.bookedSlots && d.bookedSlots.length > 0) ? d.bookedSlots[0] : "—"
+    }));
 
     return res.json(result);
   } catch (err) {
-    console.error("getAcceptedPatientsForTherapist error:", err);
-    return res.status(500).json({ message: "Server error", details: err.message });
+    console.error("❌ Error in getAcceptedPatientsForTherapist:", err.message);
+    return res.status(500).json({ message: "Server error occurred while fetching accepted patients." });
   }
 };

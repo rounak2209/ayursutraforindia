@@ -1,4 +1,4 @@
-// finalbackend/models/ProgressResponse.js
+
 import mongoose from "mongoose";
 
 const progressResponseSchema = new mongoose.Schema({
@@ -37,7 +37,7 @@ const progressResponseSchema = new mongoose.Schema({
   }
 });
 
-// 🔴 REMOVED unique:true constraint.
+
 // This allows multiple question sets to be stored for the same patient/day.
 progressResponseSchema.index({ patientId: 1, therapyType: 1, dateString: 1 });
 

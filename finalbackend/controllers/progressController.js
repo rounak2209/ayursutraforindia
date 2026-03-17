@@ -1,6 +1,5 @@
 import Progress from "../models/Progress.js";
 import AssignedTherapy from "../models/AssignedTherapy.js";
-import Patient from "../models/Patient.js";
 import ProgressResponse from "../models/ProgressResponse.js";
 import mongoose from "mongoose";
 
@@ -36,8 +35,8 @@ export const submitProgress = async (req, res) => {
 
     return res.json(doc);
   } catch (err) {
-    console.error("progress.submitProgress error:", err);
-    return res.status(500).json({ message: "Server error", detail: err.message });
+    console.error("❌ Error in submitProgress:", err.message);
+    return res.status(500).json({ message: "Server error occurred while submitting progress." });
   }
 };
 
@@ -70,7 +69,7 @@ export const getTherapyProgress = async (req, res) => {
         startDate: at.startDate,
         endDate: at.endDate,
         status: at.status,
-        sessionsCompleted: at.sessionsCompleted || 0 // pass this for milestones
+        sessionsCompleted: at.sessionsCompleted || 0 
       };
     }
 
@@ -108,8 +107,8 @@ export const getTherapyProgress = async (req, res) => {
     });
 
   } catch (err) {
-    console.error("progress.getTherapyProgress error:", err);
-    return res.status(500).json({ message: "Server error", detail: err.message });
+    console.error("❌ Error in getTherapyProgress:", err.message);
+    return res.status(500).json({ message: "Server error occurred while fetching therapy progress." });
   }
 };
 
@@ -139,7 +138,7 @@ export const getPatientProgress = async (req, res) => {
       
       let improvement = null;
 
-      // ✅ LOGIC: Calculate from First Day - Last Day
+      //  LOGIC: Calculate from First Day - Last Day
       // We need at least 2 points to calculate a trend/improvement range.
       if (therapyResponses.length >= 2) {
         const first = therapyResponses[0].percentage || 0;
@@ -168,7 +167,7 @@ export const getPatientProgress = async (req, res) => {
 
     return res.json({ therapies, overallRecovery });
   } catch (err) {
-    console.error("getPatientProgress error:", err);
-    return res.status(500).json({ message: "Server error" });
+    console.error("❌ Error in getPatientProgress:", err.message);
+    return res.status(500).json({ message: "Server error occurred while fetching patient progress." });
   }
 };

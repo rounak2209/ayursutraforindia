@@ -1,4 +1,4 @@
-// finalbackend/routes/therapyQuestionRoutes.js
+
 import express from "express";
 import { auth } from "../middleware/auth.js";
 import {

@@ -9,14 +9,15 @@ const templateQuestionSchema = new mongoose.Schema({
 const feedbackTemplateSchema = new mongoose.Schema({
   therapistId: { type: mongoose.Schema.Types.ObjectId, ref: 'Therapist', required: true },
   
-  // General Questions (Autofilled for everyone)
+  
   generalQuestions: [templateQuestionSchema],
   
-  // Therapy Specific (Autofilled based on selection)
-  // Structure: { "Vamana": [questions...], "Basti": [questions...] }
+  
+  
   therapyQuestions: {
     type: Map,
-    of: [templateQuestionSchema]
+    of: [templateQuestionSchema],
+    default: {}
   }
 });
 

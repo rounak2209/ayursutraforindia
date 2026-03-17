@@ -1,7 +1,7 @@
-import Feedback from '../models/Feedback.js'; // Legacy model (optional, keep if needed)
-import FeedbackSession from '../models/FeedbackSession.js'; // New Model
-import mongoose from 'mongoose';
+import Feedback from '../models/Feedback.js'; 
+import FeedbackSession from '../models/FeedbackSession.js'; 
 import FeedbackTemplate from '../models/FeedbackTemplate.js';
+
 /* ==========================================================================
    LEGACY FEEDBACK CONTROLLERS (Keep these if your old system still uses them)
    ========================================================================== */
@@ -19,6 +19,7 @@ const DEFAULTS = {
     'Raktamokshana': [{ id: 'th_def_r1', type: 'scale', text: 'Rate pain at the site (1-10)' }]
   }
 };
+
 /**
  * Return all feedback entries (Legacy)
  */
@@ -27,7 +28,7 @@ export const listFeedbacks = async (req, res) => {
     const list = await Feedback.find().populate('patientId therapistId', 'name email');
     return res.json(list);
   } catch (err) {
-    console.error('feedbackController.listFeedbacks error:', err);
+    console.error('❌ Error in listFeedbacks:', err.message);
     return res.status(500).json({ message: 'Server error' });
   }
 };
@@ -41,20 +42,19 @@ export const createFeedback = async (req, res) => {
     const fb = await Feedback.create(body);
     return res.status(201).json(fb);
   } catch (err) {
-    console.error('feedbackController.createFeedback error:', err);
+    console.error('❌ Error in createFeedback:', err.message);
     return res.status(500).json({ message: 'Server error' });
   }
 };
 
 /**
- * Respond to a feedback (doctor or therapist) (Legacy)
+ * Respond to a feedback ( therapist) (Legacy)
  */
 export const respond = async (req, res) => {
   try {
     const id = req.params.id;
-    const { doctorResponse, therapistInstructions } = req.body;
+    const { therapistInstructions } = req.body;
     const updateFields = {};
-    if (doctorResponse !== undefined) updateFields.doctorResponse = doctorResponse;
     if (therapistInstructions !== undefined) updateFields.therapistInstructions = therapistInstructions;
     updateFields.status = 'reviewed';
 
@@ -62,7 +62,7 @@ export const respond = async (req, res) => {
     if (!updated) return res.status(404).json({ message: 'Not found' });
     return res.json(updated);
   } catch (err) {
-    console.error('feedbackController.respond error:', err);
+    console.error('❌ Error in respond:', err.message);
     return res.status(500).json({ message: 'Server error' });
   }
 };
@@ -95,8 +95,8 @@ export const sendFeedbackRequest = async (req, res) => {
 
     return res.status(201).json(session);
   } catch (err) {
-    console.error("sendFeedbackRequest error:", err);
-    return res.status(500).json({ message: "Server error", detail: err.message });
+    console.error("❌ Error in sendFeedbackRequest:", err.message);
+    return res.status(500).json({ message: "Server error occurred while sending request." });
   }
 };
 
@@ -118,7 +118,7 @@ export const getPendingRequests = async (req, res) => {
 
     return res.json(requests);
   } catch (err) {
-    console.error("getPendingRequests error:", err);
+    console.error("❌ Error in getPendingRequests:", err.message);
     return res.status(500).json({ message: "Server error" });
   }
 };
@@ -158,7 +158,7 @@ export const submitFeedbackResponse = async (req, res) => {
 
     return res.json(session);
   } catch (err) {
-    console.error("submitFeedbackResponse error:", err);
+    console.error("❌ Error in submitFeedbackResponse:", err.message);
     return res.status(500).json({ message: "Server error" });
   }
 };
@@ -195,13 +195,10 @@ export const getFeedbackHistory = async (req, res) => {
 
     return res.json(history);
   } catch (err) {
-    console.error("getFeedbackHistory error:", err);
+    console.error("❌ Error in getFeedbackHistory:", err.message);
     return res.status(500).json({ message: "Server error" });
   }
 };
-
-
-
 
 
 export const getTemplates = async (req, res) => {
@@ -218,7 +215,7 @@ export const getTemplates = async (req, res) => {
     }
     return res.json(template);
   } catch (err) {
-    console.error("getTemplates error:", err);
+    console.error("❌ Error in getTemplates:", err.message);
     return res.status(500).json({ message: "Server error" });
   }
 };
@@ -237,7 +234,7 @@ export const saveTemplates = async (req, res) => {
 
     return res.json(template);
   } catch (err) {
-    console.error("saveTemplates error:", err);
+    console.error("❌ Error in saveTemplates:", err.message);
     return res.status(500).json({ message: "Server error" });
   }
 };

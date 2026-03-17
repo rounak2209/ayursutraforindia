@@ -9,7 +9,7 @@ import {
 const router = express.Router();
 
 // Therapist sends today's questions to a patient
-router.post("/send", auth, permit(["therapist"]), sendQuestions);
+// router.post("/send", auth, permit(["therapist"]), sendQuestions);
 
 // Patient fetches today's questions
 router.get("/today", auth, permit(["patient"]), getTodaysQuestions);

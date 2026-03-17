@@ -1,4 +1,4 @@
-// finalbackend/models/Patient.js
+
 import mongoose from "mongoose";
 
 const patientSchema = new mongoose.Schema(
@@ -7,7 +7,7 @@ const patientSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     role: { type: String, default: "patient" },
-
+    profilePic: { type: String, default: "" },
     personalDetails: {
       age: Number,
       gender: String,
@@ -23,7 +23,7 @@ const patientSchema = new mongoose.Schema(
 
     prescriptionDetails: {
   hasPrescription: { type: Boolean, default: false },
-
+      documents: [{ type: String }],
   therapies: [
     {
       therapy: { type: String, required: true },
@@ -32,14 +32,14 @@ const patientSchema = new mongoose.Schema(
   ]
 },
 
-    // <-- ADD THESE REFERENCE FIELDS
-    assignedDoctor: { type: mongoose.Schema.Types.ObjectId, ref: "Doctor", default: null },
+    
+    
     assignedTherapists: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Therapist' }],
 
 
-    // optionally store arrays if multiple:
-    // assignedDoctors: [{ type: mongoose.Schema.Types.ObjectId, ref: "Doctor" }],
-    // assignedTherapists: [{ type: mongoose.Schema.Types.ObjectId, ref: "Therapist" }],
+    
+    
+    
 
     profileStatus: {
       type: String,

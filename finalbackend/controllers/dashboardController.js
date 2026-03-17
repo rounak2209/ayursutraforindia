@@ -1,6 +1,6 @@
-// controllers/dashboardController.js
+
 import Patient from '../models/Patient.js';
-import Request from '../models/Request.js'; // remove if you don't have this model
+import Request from '../models/Request.js'; 
 
 export const getDashboardStats = async (req, res) => {
   try {
@@ -26,7 +26,7 @@ export const getDashboardStats = async (req, res) => {
       pendingRequests
     });
   } catch (err) {
-    console.error('dashboardController.getDashboardStats error:', err);
+    console.error('❌ Dashboard Stats Error:', err.message);
     return res.status(500).json({ message: 'Server error' });
   }
 };

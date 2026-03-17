@@ -1,4 +1,4 @@
-// finalbackend/controllers/therapyQuestionController.js
+
 import TherapyQuestion from "../models/TherapyQuestion.js";
 import Therapist from "../models/Therapist.js";
 
@@ -31,8 +31,8 @@ export const saveTherapyQuestions = async (req, res) => {
 
     return res.json(doc);
   } catch (err) {
-    console.error("saveTherapyQuestions:", err);
-    return res.status(500).json({ message: "Server error", detail: err.message });
+    console.error("❌ Error in saveTherapyQuestions:", err.message);
+    return res.status(500).json({ message: "Server error occurred while saving questions." });
   }
 };
 
@@ -40,8 +40,8 @@ export const saveTherapyQuestions = async (req, res) => {
  * GET /api/therapy-questions/my
  * Returns:
  * {
- *   specializations: [ "Basti", ... ],
- *   questionsByTherapy: { "Basti": [ {text, maxScore} ], ... }
+ * specializations: [ "Basti", ... ],
+ * questionsByTherapy: { "Basti": [ {text, maxScore} ], ... }
  * }
  * Uses req.user.id to identify therapist.
  */
@@ -55,7 +55,7 @@ export const getMyTherapyQuestions = async (req, res) => {
     const rawSpecs = Array.isArray(therapist?.specializations) ? therapist.specializations : [];
 
     // Map stored specializations to canonical therapyType names (case-insensitive)
-    // Adjust mapping if your specializations use different strings
+    
     const normalize = (s) => {
       if (!s) return null;
       const lower = String(s).toLowerCase();
@@ -74,33 +74,32 @@ export const getMyTherapyQuestions = async (req, res) => {
     const docs = await TherapyQuestion.find({ therapistId }).lean();
 
     const questionsByTherapy = {};
-    // 🔑 READ default maxScore from schema (single source of truth)
-const defaultMaxScore =
-  TherapyQuestion.schema
-    .path("questions")
-    .schema
-    .path("maxScore")
-    .defaultValue;
+    //  READ default maxScore from schema (single source of truth)
+    const defaultMaxScore =
+      TherapyQuestion.schema
+        .path("questions")
+        .schema
+        .path("maxScore")
+        .defaultValue;
 
-docs.forEach(d => {
-  const key = d.therapyType;
+    docs.forEach(d => {
+      const key = d.therapyType;
 
-  questionsByTherapy[key] = (d.questions || []).map(q => ({
-    text: q.text,
-    maxScore: q.maxScore ?? defaultMaxScore
-  }));
-});
+      questionsByTherapy[key] = (d.questions || []).map(q => ({
+        text: q.text,
+        maxScore: q.maxScore ?? defaultMaxScore
+      }));
+    });
 
-
-    // ensure every specialization is present in questionsByTherapy (empty array if not saved)
+    
     specializations.forEach(s => {
       if (!questionsByTherapy[s]) questionsByTherapy[s] = [];
     });
 
     return res.json({ specializations, questionsByTherapy });
   } catch (err) {
-    console.error("getMyTherapyQuestions:", err);
-    return res.status(500).json({ message: "Server error", detail: err.message });
+    console.error("❌ Error in getMyTherapyQuestions:", err.message);
+    return res.status(500).json({ message: "Server error occurred while fetching your questions." });
   }
 };
 
@@ -113,7 +112,7 @@ export const getTherapyQuestions = async (req, res) => {
     const doc = await TherapyQuestion.findOne({ therapyType }).lean();
     return res.json(doc || { questions: [] });
   } catch (err) {
-    console.error("getTherapyQuestions:", err);
+    console.error("❌ Error in getTherapyQuestions:", err.message);
     return res.status(500).json({ message: "Server error" });
   }
 };
