@@ -26,7 +26,7 @@ const App = () => (
   <>
     {/* ✅ 2. FIXED GLOBAL BACKGROUND FOR GLASSMORPHISM */}
     <div 
-      className="fixed inset-0 w-full h-full -z-50 pointer-events-none"
+      className="fixed inset-0 w-full h-[100dvh] scale-[1.05] bg-[#efe7d3] -z-50 pointer-events-none"
       style={{
         backgroundImage: `url(${bgImage})`,
         backgroundSize: 'cover',

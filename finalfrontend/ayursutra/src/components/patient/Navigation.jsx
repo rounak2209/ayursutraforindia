@@ -30,11 +30,6 @@ export default function Navigation({ activeView, onViewChange, onLogout }) {
       active: "bg-gradient-to-r from-emerald-500 to-emerald-400 text-white shadow-[0_8px_20px_rgba(16,185,129,0.4)] border-white/40" 
     },
     { 
-      id: "assigned-therapists", icon: User, label: "Therapists", 
-      inactive: "text-indigo-800 hover:bg-white/40 border-transparent", 
-      active: "bg-gradient-to-r from-indigo-500 to-indigo-400 text-white shadow-[0_8px_20px_rgba(99,102,241,0.4)] border-white/40" 
-    },
-    { 
       id: "find-therapist", icon: Compass, label: "Find Therapist", 
       inactive: "text-cyan-800 hover:bg-white/40 border-transparent", 
       active: "bg-gradient-to-r from-cyan-500 to-cyan-400 text-white shadow-[0_8px_20px_rgba(6,182,212,0.4)] border-white/40" 

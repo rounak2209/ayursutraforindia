@@ -351,30 +351,33 @@ export default function TherapistDashboard() {
             <div className="bg-white/20 backdrop-blur-[40px] rounded-[3rem] border-[1.5px] border-white/50 shadow-[0_20px_60px_-10px_rgba(20,184,166,0.15)] overflow-hidden relative" style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%)' }}>
               <div className="absolute -top-20 -right-20 w-64 h-64 bg-teal-400/20 rounded-full blur-[60px] pointer-events-none z-0"></div>
               
-              <div className="bg-white/30 backdrop-blur-md border-b border-white/40 p-8 relative z-10">
-                <h3 className="flex items-center gap-4 text-2xl text-teal-950 font-black tracking-tight">
-                  <div className="bg-white/50 p-3 rounded-[1rem] shadow-sm border-[1.5px] border-white/70">
-                    <CalendarIcon className="h-6 w-6 text-teal-700"/>
+              <div className="bg-white/30 backdrop-blur-md border-b border-white/40 p-6 md:p-8 relative z-10">
+                <h3 className="flex items-center gap-3 md:gap-4 text-xl md:text-2xl text-teal-950 font-black tracking-tight">
+                  <div className="bg-white/50 p-2 md:p-3 rounded-[1rem] shadow-sm border-[1.5px] border-white/70">
+                    <CalendarIcon className="h-5 w-5 md:h-6 md:w-6 text-teal-700"/>
                   </div>
                   Availability Manager
                 </h3>
               </div>
-              <div className="p-8 relative z-10">
-                <div className="bg-white/40 backdrop-blur-md border-[1.5px] border-white/60 rounded-[2rem] p-4 md:p-6 shadow-sm">
-                  <Calendar
-                    mode="single"
-                    selected={selectedDate}
-                    onSelect={(d) => { setSelectedDate(d); toggleUnavailable(d); }}
-                    modifiers={{ blocked: therapist.availability.unavailableDates }}
-                    modifiersClassNames={{ blocked: "bg-rose-500/20 text-rose-950 font-black hover:bg-rose-500/30 rounded-xl border border-rose-400/50 shadow-sm" }}
-                    className="w-full font-bold text-teal-950 [&_.rdp-day_button]:font-bold [&_.rdp-head_cell]:font-black [&_.rdp-head_cell]:uppercase [&_.rdp-head_cell]:tracking-widest"
-                  />
+              <div className="p-4 md:p-8 relative z-10">
+                {/* 🚨 CHANGED HERE: Added w-full, overflow-x-auto, and reduced padding for mobile */}
+                <div className="bg-white/40 backdrop-blur-md border-[1.5px] border-white/60 rounded-[2rem] p-2 md:p-6 shadow-sm w-full overflow-x-auto flex justify-center">
+                  <div className="min-w-fit">
+                    <Calendar
+                      mode="single"
+                      selected={selectedDate}
+                      onSelect={(d) => { setSelectedDate(d); toggleUnavailable(d); }}
+                      modifiers={{ blocked: therapist.availability.unavailableDates }}
+                      modifiersClassNames={{ blocked: "bg-rose-500/20 text-rose-950 font-black hover:bg-rose-500/30 rounded-xl border border-rose-400/50 shadow-sm" }}
+                      className="w-full font-bold text-teal-950 [&_.rdp-day_button]:font-bold [&_.rdp-head_cell]:font-black [&_.rdp-head_cell]:uppercase [&_.rdp-head_cell]:tracking-widest"
+                    />
+                  </div>
                 </div>
-                <div className="mt-8 p-5 bg-white/40 backdrop-blur-md rounded-[1.5rem] border-[1.5px] border-teal-100/50 text-sm text-teal-950 font-bold flex gap-4 shadow-sm items-start">
-                   <div className="p-2 bg-white/50 rounded-lg shadow-sm border border-white/60 shrink-0 mt-0.5">
-                     <AlertCircle className="w-5 h-5 text-teal-700" /> 
+                <div className="mt-6 md:mt-8 p-4 md:p-5 bg-white/40 backdrop-blur-md rounded-[1.5rem] border-[1.5px] border-teal-100/50 text-xs md:text-sm text-teal-950 font-bold flex gap-3 md:gap-4 shadow-sm items-start">
+                   <div className="p-1.5 md:p-2 bg-white/50 rounded-lg shadow-sm border border-white/60 shrink-0 mt-0.5">
+                     <AlertCircle className="w-4 h-4 md:w-5 md:h-5 text-teal-700" /> 
                    </div>
-                   <p className="leading-relaxed pt-1">Tap dates to mark as <strong>Unavailable</strong>. <span className="text-rose-600 bg-rose-100 px-2 py-0.5 rounded-md">Red dates</span> are blocked for patients.</p>
+                   <p className="leading-relaxed pt-0.5 md:pt-1">Tap dates to mark as <strong>Unavailable</strong>. <span className="text-rose-600 bg-rose-100 px-2 py-0.5 rounded-md">Red dates</span> are blocked for patients.</p>
                 </div>
               </div>
             </div>
@@ -382,10 +385,10 @@ export default function TherapistDashboard() {
             <div className="bg-white/20 backdrop-blur-[40px] rounded-[3rem] border-[1.5px] border-white/50 shadow-[0_20px_60px_-10px_rgba(20,184,166,0.15)] overflow-hidden h-fit relative" style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.05) 100%)' }}>
               <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-rose-400/10 rounded-full blur-[60px] pointer-events-none z-0"></div>
               
-              <div className="bg-white/30 backdrop-blur-md border-b border-white/40 p-8 relative z-10">
-                <h3 className="text-2xl text-teal-950 font-black tracking-tight">Blocked Dates</h3>
+              <div className="bg-white/30 backdrop-blur-md border-b border-white/40 p-6 md:p-8 relative z-10">
+                <h3 className="text-xl md:text-2xl text-teal-950 font-black tracking-tight">Blocked Dates</h3>
               </div>
-              <div className="p-8 relative z-10">
+              <div className="p-4 md:p-8 relative z-10">
                 <div className="space-y-4">
                   {upcomingUnavailable.length === 0 ? (
                     <div className="py-16 text-center bg-white/30 backdrop-blur-md rounded-[2rem] border-[2px] border-dashed border-white/60 shadow-inner flex flex-col items-center justify-center">
@@ -396,17 +399,17 @@ export default function TherapistDashboard() {
                     </div>
                   ) : (
                     upcomingUnavailable.map((date, i) => (
-                      <div key={i} className="flex items-center justify-between p-5 bg-white/40 backdrop-blur-md border-[1.5px] border-white/60 rounded-[1.5rem] shadow-sm hover:shadow-md hover:bg-white/60 transition-all hover:-translate-y-0.5">
-                        <div className="flex items-center gap-5">
-                          <div className="bg-rose-500/10 text-rose-700 border-[1.5px] border-rose-400/50 w-14 h-14 flex items-center justify-center rounded-2xl font-black text-lg shadow-sm">
+                      <div key={i} className="flex items-center justify-between p-4 md:p-5 bg-white/40 backdrop-blur-md border-[1.5px] border-white/60 rounded-[1.5rem] shadow-sm hover:shadow-md hover:bg-white/60 transition-all hover:-translate-y-0.5">
+                        <div className="flex items-center gap-4 md:gap-5">
+                          <div className="bg-rose-500/10 text-rose-700 border-[1.5px] border-rose-400/50 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-2xl font-black text-lg shadow-sm">
                             {date.getDate()}
                           </div>
                           <div>
-                            <p className="font-black text-teal-950 text-lg mb-0.5">{date.toLocaleDateString('en-IN', { month: 'long', year: 'numeric' })}</p>
-                            <p className="text-[10px] text-teal-900/60 font-black uppercase tracking-widest">{date.toLocaleDateString('en-IN', { weekday: 'long' })}</p>
+                            <p className="font-black text-teal-950 text-base md:text-lg mb-0.5">{date.toLocaleDateString('en-IN', { month: 'long', year: 'numeric' })}</p>
+                            <p className="text-[9px] md:text-[10px] text-teal-900/60 font-black uppercase tracking-widest">{date.toLocaleDateString('en-IN', { weekday: 'long' })}</p>
                           </div>
                         </div>
-                        <Button variant="ghost" size="sm" onClick={() => toggleUnavailable(date)} className="text-rose-700 font-black hover:bg-rose-500/20 hover:text-rose-950 rounded-xl bg-white/50 border-[1.5px] border-white/70 shadow-sm h-10 px-5 transition-all">Unblock</Button>
+                        <Button variant="ghost" size="sm" onClick={() => toggleUnavailable(date)} className="text-rose-700 font-black hover:bg-rose-500/20 hover:text-rose-950 rounded-xl bg-white/50 border-[1.5px] border-white/70 shadow-sm h-10 px-4 md:px-5 transition-all">Unblock</Button>
                       </div>
                     ))
                   )}

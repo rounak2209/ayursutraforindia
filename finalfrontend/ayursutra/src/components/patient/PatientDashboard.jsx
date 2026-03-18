@@ -4,7 +4,6 @@ import Reminders from "./sections/Reminders";
 import AssignedTherapies from "./sections/AssignedTherapies";
 import Feedback from "./sections/Feedback";
 import FindTherapist from "./sections/FindTherapist";
-import AssignedTherapists from "./sections/AssignedTherapists";
 import ProgressDashboard from "./sections/ProgressDashboard";
 import PatientTracking from "./sections/PatientTracking"; 
 import { apiGet } from "@/lib/api";
@@ -311,7 +310,6 @@ const PatientDashboard = () => {
       case "therapies": return <AssignedTherapies />;
       case "feedback": return <Feedback />;
       case "find-therapist": return <FindTherapist />;
-      case "assigned-therapists": return <AssignedTherapists />;
       default: return renderDashboardView();
     }
   };

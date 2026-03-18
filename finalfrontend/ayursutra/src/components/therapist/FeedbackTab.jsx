@@ -245,7 +245,7 @@ export default function FeedbackTab() {
             Patient Feedback
           </h2>
         </div>
-        <Button onClick={() => setIsTemplateOpen(true)} className="h-12 px-6 rounded-full bg-white/40 hover:bg-white/60 backdrop-blur-md border-[1.5px] border-white/70 text-teal-950 font-black shadow-sm transition-all flex items-center gap-2">
+        <Button onClick={() => setIsTemplateOpen(true)} className="w-full md:w-auto h-12 px-6 rounded-full bg-white/40 hover:bg-white/60 backdrop-blur-md border-[1.5px] border-white/70 text-teal-950 font-black shadow-sm transition-all flex items-center justify-center gap-2">
           <Settings className="w-4 h-4" /> Global Templates
         </Button>
       </div>
@@ -272,7 +272,7 @@ export default function FeedbackTab() {
            <Input type="date" value={filterDate} onChange={(e) => setFilterDate(e.target.value)} className="bg-white/50 hover:bg-white/70 border-[1.5px] border-white/70 h-12 rounded-[1.25rem] font-bold text-teal-950 shadow-sm focus:ring-2 focus:ring-teal-400 w-full lg:w-48 transition-all" />
         </div>
         {(searchQuery || filterTherapy !== "all" || filterDate) && (
-          <Button variant="ghost" onClick={clearFilters} className="text-rose-700 hover:text-rose-900 hover:bg-rose-500/20 font-black uppercase tracking-widest text-[10px] h-12 px-5 rounded-[1.25rem] border-[1.5px] border-rose-400/30 transition-all z-10 bg-white/30">
+          <Button variant="ghost" onClick={clearFilters} className="w-full lg:w-auto text-rose-700 hover:text-rose-900 hover:bg-rose-500/20 font-black uppercase tracking-widest text-[10px] h-12 px-5 rounded-[1.25rem] border-[1.5px] border-rose-400/30 transition-all z-10 bg-white/30">
              <X className="w-4 h-4 mr-1.5" /> Clear
           </Button>
         )}
@@ -288,7 +288,7 @@ export default function FeedbackTab() {
           <p className="text-xs font-bold text-teal-900/60 mt-1 uppercase tracking-widest relative z-10">Try adjusting your filters.</p>
         </div>
       ) : (
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 md:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {filteredPatients.map((item) => {
             const p = normalizePatient(item.patient);
             
@@ -296,7 +296,7 @@ export default function FeedbackTab() {
               <div key={item.requestId || item._id} className="group relative overflow-hidden rounded-[2.5rem] bg-white/20 backdrop-blur-[30px] border-[1.5px] border-white/50 hover:shadow-[0_15px_40px_rgba(20,184,166,0.15)] hover:border-white/80 transition-all duration-500 flex flex-col" style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%)' }}>
                 <div className="absolute -top-20 -right-20 w-40 h-40 bg-teal-400/20 rounded-full blur-[40px] pointer-events-none group-hover:scale-150 transition-transform duration-700"></div>
 
-                <div className="p-6 md:p-8 flex flex-col gap-6 relative z-10 h-full">
+                <div className="p-6 flex flex-col gap-6 relative z-10 h-full">
                   <div className="flex items-center gap-4">
                     <div className="w-16 h-16 rounded-[1.25rem] bg-white/40 border-[1.5px] border-white/70 shadow-[0_4px_15px_rgba(0,0,0,0.1)] flex items-center justify-center overflow-hidden backdrop-blur-md shrink-0">
                       {p.profilePic ? (
@@ -323,143 +323,143 @@ export default function FeedbackTab() {
         </div>
       )}
 
-      {/* --- MODAL 1: REQUEST COMPOSER (GLASSMORPHISM) --- */}
+      {/* --- MODAL 1: REQUEST COMPOSER --- */}
       <Dialog open={isRequestOpen} onOpenChange={setIsRequestOpen}>
-        <DialogContent className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] max-w-4xl w-[90vw] max-h-[90vh] overflow-y-auto overflow-x-hidden p-0 bg-white/30 backdrop-blur-[50px] border-[1.5px] border-white/60 shadow-[0_30px_80px_rgba(0,0,0,0.3)] rounded-[3rem] [&::-webkit-scrollbar]:hidden z-[100] [&>button]:hidden">
+        <DialogContent className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] max-w-4xl w-[95vw] md:w-[90vw] max-h-[90vh] overflow-y-auto overflow-x-hidden p-0 bg-white/30 backdrop-blur-[50px] border-[1.5px] border-white/60 shadow-[0_30px_80px_rgba(0,0,0,0.3)] rounded-[2rem] md:rounded-[3rem] [&::-webkit-scrollbar]:hidden z-[100] [&>button]:hidden">
           
           <div className="relative">
-            <div className="p-8 md:p-10 border-b border-white/30 flex items-center justify-between gap-6 relative overflow-hidden bg-white/10" style={{ background: 'linear-gradient(135deg, rgba(20,184,166,0.2) 0%, rgba(255,255,255,0.05) 100%)' }}>
+            <div className="p-6 md:p-10 border-b border-white/30 flex items-center justify-between gap-4 md:gap-6 relative overflow-hidden bg-white/10" style={{ background: 'linear-gradient(135deg, rgba(20,184,166,0.2) 0%, rgba(255,255,255,0.05) 100%)' }}>
               <div className="absolute top-0 right-0 w-64 h-64 bg-teal-400/20 rounded-full blur-[60px] pointer-events-none -z-10"></div>
               
-              <div className="flex items-center gap-4 relative z-10">
-                <div className="w-14 h-14 bg-white/40 backdrop-blur-md rounded-2xl border-[1.5px] border-white/70 shadow-sm flex items-center justify-center shrink-0">
-                  <Send className="w-6 h-6 text-teal-800 drop-shadow-sm" />
+              <div className="flex items-center gap-3 md:gap-4 relative z-10">
+                <div className="w-10 h-10 md:w-14 md:h-14 bg-white/40 backdrop-blur-md rounded-xl md:rounded-2xl border-[1.5px] border-white/70 shadow-sm flex items-center justify-center shrink-0">
+                  <Send className="w-5 h-5 md:w-6 md:h-6 text-teal-800 drop-shadow-sm" />
                 </div>
                 <div>
-                  <DialogTitle className="text-3xl font-black text-teal-950 tracking-tight leading-none mb-1.5 drop-shadow-sm">Request Feedback</DialogTitle>
-                  <DialogDescription className="text-[10px] font-black uppercase tracking-widest text-teal-900/60">For {selectedPatient?.patient?.name}</DialogDescription>
+                  <DialogTitle className="text-xl md:text-3xl font-black text-teal-950 tracking-tight leading-none mb-1 drop-shadow-sm">Request Feedback</DialogTitle>
+                  <DialogDescription className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-teal-900/60">For {selectedPatient?.patient?.name}</DialogDescription>
                 </div>
               </div>
-              <button onClick={() => setIsRequestOpen(false)} className="text-teal-900 hover:text-teal-950 transition-colors bg-white/40 rounded-full p-2.5 backdrop-blur-md border border-white/50 shadow-sm relative z-50">
-                 <X className="w-5 h-5" />
+              <button onClick={() => setIsRequestOpen(false)} className="text-teal-900 hover:text-teal-950 transition-colors bg-white/40 rounded-full p-2 backdrop-blur-md border border-white/50 shadow-sm relative z-50 shrink-0">
+                 <X className="w-4 h-4 md:w-5 md:h-5" />
               </button>
             </div>
             
-            <div className="p-8 md:p-10 space-y-8 relative z-10">
+            <div className="p-4 md:p-10 space-y-6 md:space-y-8 relative z-10">
               
               {/* General Qs */}
-              <div className="bg-white/40 backdrop-blur-md p-8 rounded-[2rem] border-[1.5px] border-white/60 shadow-sm relative overflow-hidden group">
+              <div className="bg-white/40 backdrop-blur-md p-5 md:p-8 rounded-[1.5rem] md:rounded-[2rem] border-[1.5px] border-white/60 shadow-sm relative overflow-hidden group">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-blue-400/10 rounded-full blur-[40px] pointer-events-none group-hover:scale-150 transition-transform duration-700"></div>
-                <h3 className="font-black text-lg text-teal-950 mb-6 flex items-center gap-3 uppercase tracking-widest border-b-[1.5px] border-white/50 pb-4 relative z-10"><Activity className="w-5 h-5 text-blue-600" /> General Health</h3>
+                <h3 className="font-black text-base md:text-lg text-teal-950 mb-4 md:mb-6 flex items-center gap-2 md:gap-3 uppercase tracking-widest border-b-[1.5px] border-white/50 pb-3 md:pb-4 relative z-10"><Activity className="w-4 h-4 md:w-5 md:h-5 text-blue-600" /> General Health</h3>
                 
-                <div className="space-y-4 relative z-10">
+                <div className="space-y-3 md:space-y-4 relative z-10">
                   {questions.filter(q => q.category === 'general').map(q => (
-                    <div key={q.id} className="flex flex-col sm:flex-row gap-3 items-start sm:items-center bg-white/50 p-3 rounded-[1.25rem] border border-white/70 shadow-sm">
-                      <Badge className="bg-white/80 text-teal-950 border border-white/90 shadow-none px-3 py-1 uppercase tracking-widest text-[9px] shrink-0 w-20 justify-center">{q.type}</Badge>
-                      <Input value={q.text} onChange={(e) => setQuestions(questions.map(x => x.id === q.id ? {...x, text: e.target.value} : x))} className="h-10 bg-white/40 border-[1.5px] border-white/60 rounded-xl font-bold text-teal-950 focus:bg-white/80 transition-colors flex-1" />
-                      <Button size="icon" variant="ghost" className="h-10 w-10 shrink-0 bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 rounded-xl border border-rose-400/30" onClick={() => removeQuestion(q.id)}><Trash2 className="w-4 h-4" /></Button>
+                    <div key={q.id} className="flex flex-col sm:flex-row gap-2 md:gap-3 items-start sm:items-center bg-white/50 p-3 rounded-xl md:rounded-[1.25rem] border border-white/70 shadow-sm w-full">
+                      <Badge className="bg-white/80 text-teal-950 border border-white/90 shadow-none px-3 py-1 uppercase tracking-widest text-[9px] shrink-0 w-full sm:w-20 justify-center">{q.type}</Badge>
+                      <Input value={q.text} onChange={(e) => setQuestions(questions.map(x => x.id === q.id ? {...x, text: e.target.value} : x))} className="h-10 bg-white/40 border-[1.5px] border-white/60 rounded-xl font-bold text-teal-950 focus:bg-white/80 transition-colors flex-1 w-full" />
+                      <Button size="icon" variant="ghost" className="h-10 w-full sm:w-10 shrink-0 bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 rounded-xl border border-rose-400/30" onClick={() => removeQuestion(q.id)}><Trash2 className="w-4 h-4" /></Button>
                     </div>
                   ))}
                 </div>
                 
-                <div className="flex flex-col sm:flex-row gap-3 mt-6 pt-6 border-t-[1.5px] border-white/50 items-center relative z-10 bg-white/20 p-4 rounded-[1.5rem]">
+                <div className="flex flex-col sm:flex-row gap-3 mt-4 md:mt-6 pt-4 md:pt-6 border-t-[1.5px] border-white/50 items-center relative z-10 bg-white/20 p-3 md:p-4 rounded-xl md:rounded-[1.5rem]">
                    <Select value={genNewType} onValueChange={setGenNewType}>
-                      <SelectTrigger className="w-full sm:w-[120px] h-12 bg-white/60 border-[1.5px] border-white/80 rounded-[1rem] font-black text-xs text-teal-950"><SelectValue /></SelectTrigger>
+                      <SelectTrigger className="w-full sm:w-[120px] h-12 bg-white/60 border-[1.5px] border-white/80 rounded-xl md:rounded-[1rem] font-black text-xs text-teal-950"><SelectValue /></SelectTrigger>
                       <SelectContent className="bg-white/90 backdrop-blur-xl border-white/80 rounded-2xl shadow-xl"><SelectItem value="scale" className="font-bold">Scale</SelectItem><SelectItem value="binary" className="font-bold">Yes/No</SelectItem><SelectItem value="text" className="font-bold">Text</SelectItem></SelectContent>
                    </Select>
-                   <Input placeholder="Type custom general question..." value={genNewText} onChange={e=>setGenNewText(e.target.value)} className="h-12 bg-white/60 border-[1.5px] border-white/80 rounded-[1rem] font-bold text-teal-950 placeholder:text-teal-900/40 flex-1" />
-                   <Button variant="secondary" onClick={addGeneralQuestion} className="h-12 px-6 rounded-[1rem] bg-teal-500/20 hover:bg-teal-500/30 text-teal-950 font-black uppercase tracking-widest border border-teal-400/50 shadow-sm w-full sm:w-auto"><Plus className="w-4 h-4 mr-2"/> Add</Button>
+                   <Input placeholder="Type custom general question..." value={genNewText} onChange={e=>setGenNewText(e.target.value)} className="h-12 bg-white/60 border-[1.5px] border-white/80 rounded-xl md:rounded-[1rem] font-bold text-teal-950 placeholder:text-teal-900/40 w-full flex-1" />
+                   <Button variant="secondary" onClick={addGeneralQuestion} className="h-12 px-6 rounded-xl md:rounded-[1rem] bg-teal-500/20 hover:bg-teal-500/30 text-teal-950 font-black uppercase tracking-widest border border-teal-400/50 shadow-sm w-full sm:w-auto"><Plus className="w-4 h-4 mr-2"/> Add</Button>
                 </div>
               </div>
 
               {/* Therapy Qs */}
-              <div className="bg-white/40 backdrop-blur-md p-8 rounded-[2rem] border-[1.5px] border-white/60 shadow-sm relative overflow-hidden group">
+              <div className="bg-white/40 backdrop-blur-md p-5 md:p-8 rounded-[1.5rem] md:rounded-[2rem] border-[1.5px] border-white/60 shadow-sm relative overflow-hidden group">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-purple-400/10 rounded-full blur-[40px] pointer-events-none group-hover:scale-150 transition-transform duration-700"></div>
                 
-                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6 border-b-[1.5px] border-white/50 pb-4 relative z-10">
-                  <h3 className="font-black text-lg text-teal-950 flex items-center gap-3 uppercase tracking-widest"><FileText className="w-5 h-5 text-purple-600" /> Therapy Specific</h3>
+                <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-3 md:gap-4 mb-4 md:mb-6 border-b-[1.5px] border-white/50 pb-3 md:pb-4 relative z-10">
+                  <h3 className="font-black text-base md:text-lg text-teal-950 flex items-center gap-2 md:gap-3 uppercase tracking-widest"><FileText className="w-4 h-4 md:w-5 md:h-5 text-purple-600" /> Therapy Specific</h3>
                   <Select value={selectedTherapy} onValueChange={handleTherapySelect}>
-                    <SelectTrigger className="w-full sm:w-[200px] h-12 bg-purple-500/10 border-[1.5px] border-purple-400/30 rounded-[1rem] font-black text-xs text-purple-950 uppercase tracking-widest shadow-sm"><SelectValue placeholder="Select Therapy" /></SelectTrigger>
+                    <SelectTrigger className="w-full md:w-[200px] h-12 bg-purple-500/10 border-[1.5px] border-purple-400/30 rounded-xl md:rounded-[1rem] font-black text-xs text-purple-950 uppercase tracking-widest shadow-sm"><SelectValue placeholder="Select Therapy" /></SelectTrigger>
                     <SelectContent className="bg-white/90 backdrop-blur-xl border-white/80 rounded-2xl shadow-xl">{THERAPY_TYPES.map(t => <SelectItem key={t} value={t} className="font-bold">{t}</SelectItem>)}</SelectContent>
                   </Select>
                 </div>
                 
-                <div className="space-y-4 relative z-10">
+                <div className="space-y-3 md:space-y-4 relative z-10">
                   {questions.filter(q => q.category === 'therapy').map(q => (
-                    <div key={q.id} className="flex flex-col sm:flex-row gap-3 items-start sm:items-center bg-white/50 p-3 rounded-[1.25rem] border border-white/70 shadow-sm">
-                      <Badge className="bg-purple-500/20 text-purple-950 border border-purple-400/50 shadow-none px-3 py-1 uppercase tracking-widest text-[9px] shrink-0 w-20 justify-center">{q.type}</Badge>
-                      <Input value={q.text} onChange={(e) => setQuestions(questions.map(x => x.id === q.id ? {...x, text: e.target.value} : x))} className="h-10 bg-white/40 border-[1.5px] border-white/60 rounded-xl font-bold text-teal-950 focus:bg-white/80 transition-colors flex-1" />
-                      <Button size="icon" variant="ghost" className="h-10 w-10 shrink-0 bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 rounded-xl border border-rose-400/30" onClick={() => removeQuestion(q.id)}><Trash2 className="w-4 h-4" /></Button>
+                    <div key={q.id} className="flex flex-col sm:flex-row gap-2 md:gap-3 items-start sm:items-center bg-white/50 p-3 rounded-xl md:rounded-[1.25rem] border border-white/70 shadow-sm w-full">
+                      <Badge className="bg-purple-500/20 text-purple-950 border border-purple-400/50 shadow-none px-3 py-1 uppercase tracking-widest text-[9px] shrink-0 w-full sm:w-20 justify-center">{q.type}</Badge>
+                      <Input value={q.text} onChange={(e) => setQuestions(questions.map(x => x.id === q.id ? {...x, text: e.target.value} : x))} className="h-10 bg-white/40 border-[1.5px] border-white/60 rounded-xl font-bold text-teal-950 focus:bg-white/80 transition-colors flex-1 w-full" />
+                      <Button size="icon" variant="ghost" className="h-10 w-full sm:w-10 shrink-0 bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 rounded-xl border border-rose-400/30" onClick={() => removeQuestion(q.id)}><Trash2 className="w-4 h-4" /></Button>
                     </div>
                   ))}
                   {questions.filter(q => q.category === 'therapy').length === 0 && (
-                      <div className="text-center py-6 text-teal-900/50 text-xs font-bold uppercase tracking-widest bg-white/30 rounded-2xl border border-dashed border-white/60">No therapy questions added.</div>
+                      <div className="text-center py-4 md:py-6 text-teal-900/50 text-[10px] md:text-xs font-bold uppercase tracking-widest bg-white/30 rounded-xl md:rounded-2xl border border-dashed border-white/60">No therapy questions added.</div>
                   )}
                 </div>
                 
                 {selectedTherapy && (
-                    <div className="flex flex-col sm:flex-row gap-3 mt-6 pt-6 border-t-[1.5px] border-white/50 items-center relative z-10 bg-white/20 p-4 rounded-[1.5rem]">
+                    <div className="flex flex-col sm:flex-row gap-3 mt-4 md:mt-6 pt-4 md:pt-6 border-t-[1.5px] border-white/50 items-center relative z-10 bg-white/20 p-3 md:p-4 rounded-xl md:rounded-[1.5rem]">
                       <Select value={thNewType} onValueChange={setThNewType}>
-                        <SelectTrigger className="w-full sm:w-[120px] h-12 bg-white/60 border-[1.5px] border-white/80 rounded-[1rem] font-black text-xs text-teal-950"><SelectValue /></SelectTrigger>
+                        <SelectTrigger className="w-full sm:w-[120px] h-12 bg-white/60 border-[1.5px] border-white/80 rounded-xl md:rounded-[1rem] font-black text-xs text-teal-950"><SelectValue /></SelectTrigger>
                         <SelectContent className="bg-white/90 backdrop-blur-xl border-white/80 rounded-2xl shadow-xl"><SelectItem value="scale" className="font-bold">Scale</SelectItem><SelectItem value="binary" className="font-bold">Yes/No</SelectItem><SelectItem value="text" className="font-bold">Text</SelectItem></SelectContent>
                       </Select>
-                      <Input placeholder={`Type custom ${selectedTherapy} question...`} value={thNewText} onChange={e=>setThNewText(e.target.value)} className="h-12 bg-white/60 border-[1.5px] border-white/80 rounded-[1rem] font-bold text-teal-950 placeholder:text-teal-900/40 flex-1" />
-                      <Button variant="secondary" onClick={addTherapyQuestion} className="h-12 px-6 rounded-[1rem] bg-purple-500/20 hover:bg-purple-500/30 text-purple-950 font-black uppercase tracking-widest border border-purple-400/50 shadow-sm w-full sm:w-auto"><Plus className="w-4 h-4 mr-2"/> Add</Button>
+                      <Input placeholder={`Type custom ${selectedTherapy} question...`} value={thNewText} onChange={e=>setThNewText(e.target.value)} className="h-12 bg-white/60 border-[1.5px] border-white/80 rounded-xl md:rounded-[1rem] font-bold text-teal-950 placeholder:text-teal-900/40 flex-1 w-full" />
+                      <Button variant="secondary" onClick={addTherapyQuestion} className="h-12 px-6 rounded-xl md:rounded-[1rem] bg-purple-500/20 hover:bg-purple-500/30 text-purple-950 font-black uppercase tracking-widest border border-purple-400/50 shadow-sm w-full sm:w-auto"><Plus className="w-4 h-4 mr-2"/> Add</Button>
                     </div>
                 )}
               </div>
             </div>
             
-            <div className="p-8 bg-white/20 border-t-[1.5px] border-white/40 flex flex-col sm:flex-row justify-end gap-4">
-               <Button onClick={() => setIsRequestOpen(false)} variant="outline" className="bg-white/50 hover:bg-white/70 border-[1.5px] border-white/80 text-teal-950 shadow-sm h-14 px-8 rounded-full font-black uppercase tracking-widest transition-all">Cancel</Button>
-               <Button onClick={sendRequest} className="bg-gradient-to-r from-teal-600 to-emerald-500 hover:from-teal-500 hover:to-emerald-400 text-white shadow-[0_8px_20px_rgba(20,184,166,0.3)] h-14 px-10 rounded-full font-black uppercase tracking-widest transition-all hover:scale-[1.02] hover:-translate-y-0.5"><Send className="w-5 h-5 mr-2" /> Send Request</Button>
+            <div className="p-4 md:p-8 bg-white/20 border-t-[1.5px] border-white/40 flex flex-col sm:flex-row justify-end gap-3 md:gap-4">
+               <Button onClick={() => setIsRequestOpen(false)} variant="outline" className="w-full sm:w-auto bg-white/50 hover:bg-white/70 border-[1.5px] border-white/80 text-teal-950 shadow-sm h-12 md:h-14 px-6 md:px-8 rounded-full font-black uppercase tracking-widest transition-all">Cancel</Button>
+               <Button onClick={sendRequest} className="w-full sm:w-auto bg-gradient-to-r from-teal-600 to-emerald-500 hover:from-teal-500 hover:to-emerald-400 text-white shadow-[0_8px_20px_rgba(20,184,166,0.3)] h-12 md:h-14 px-8 md:px-10 rounded-full font-black uppercase tracking-widest transition-all hover:scale-[1.02] hover:-translate-y-0.5"><Send className="w-4 h-4 md:w-5 md:h-5 mr-2" /> Send Request</Button>
             </div>
           </div>
         </DialogContent>
       </Dialog>
 
-      {/* --- MODAL 2: HISTORY (GLASSMORPHISM) --- */}
+      {/* --- MODAL 2: HISTORY --- */}
       <Dialog open={isHistoryOpen} onOpenChange={setIsHistoryOpen}>
-        <DialogContent className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] max-w-3xl w-[90vw] max-h-[85vh] overflow-y-auto overflow-x-hidden p-0 bg-white/30 backdrop-blur-[50px] border-[1.5px] border-white/60 shadow-[0_30px_80px_rgba(0,0,0,0.3)] rounded-[3rem] [&::-webkit-scrollbar]:hidden z-[100] [&>button]:hidden">
+        <DialogContent className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] max-w-3xl w-[95vw] md:w-[90vw] max-h-[85vh] overflow-y-auto overflow-x-hidden p-0 bg-white/30 backdrop-blur-[50px] border-[1.5px] border-white/60 shadow-[0_30px_80px_rgba(0,0,0,0.3)] rounded-[2rem] md:rounded-[3rem] [&::-webkit-scrollbar]:hidden z-[100] [&>button]:hidden">
           
           <div className="relative">
-            <div className="p-8 md:p-10 border-b border-white/30 flex items-center justify-between gap-6 relative overflow-hidden bg-white/10" style={{ background: 'linear-gradient(135deg, rgba(20,184,166,0.2) 0%, rgba(255,255,255,0.05) 100%)' }}>
+            <div className="p-6 md:p-10 border-b border-white/30 flex items-center justify-between gap-4 md:gap-6 relative overflow-hidden bg-white/10" style={{ background: 'linear-gradient(135deg, rgba(20,184,166,0.2) 0%, rgba(255,255,255,0.05) 100%)' }}>
               <div className="absolute top-0 right-0 w-64 h-64 bg-teal-400/20 rounded-full blur-[60px] pointer-events-none -z-10"></div>
               
-              <div className="flex items-center gap-4 relative z-10">
-                <div className="w-14 h-14 bg-white/40 backdrop-blur-md rounded-2xl border-[1.5px] border-white/70 shadow-sm flex items-center justify-center shrink-0">
-                  <History className="w-6 h-6 text-teal-800 drop-shadow-sm" />
+              <div className="flex items-center gap-3 md:gap-4 relative z-10">
+                <div className="w-10 h-10 md:w-14 md:h-14 bg-white/40 backdrop-blur-md rounded-xl md:rounded-2xl border-[1.5px] border-white/70 shadow-sm flex items-center justify-center shrink-0">
+                  <History className="w-5 h-5 md:w-6 md:h-6 text-teal-800 drop-shadow-sm" />
                 </div>
                 <div>
-                  <DialogTitle className="text-3xl font-black text-teal-950 tracking-tight leading-none mb-1.5 drop-shadow-sm">Feedback History</DialogTitle>
-                  <DialogDescription className="text-[10px] font-black uppercase tracking-widest text-teal-900/60">For {selectedPatient?.patient?.name}</DialogDescription>
+                  <DialogTitle className="text-xl md:text-3xl font-black text-teal-950 tracking-tight leading-none mb-1 drop-shadow-sm">History</DialogTitle>
+                  <DialogDescription className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-teal-900/60">For {selectedPatient?.patient?.name}</DialogDescription>
                 </div>
               </div>
-              <button onClick={() => setIsHistoryOpen(false)} className="text-teal-900 hover:text-teal-950 transition-colors bg-white/40 rounded-full p-2.5 backdrop-blur-md border border-white/50 shadow-sm relative z-50">
-                 <X className="w-5 h-5" />
+              <button onClick={() => setIsHistoryOpen(false)} className="text-teal-900 hover:text-teal-950 transition-colors bg-white/40 rounded-full p-2 backdrop-blur-md border border-white/50 shadow-sm relative z-50 shrink-0">
+                 <X className="w-4 h-4 md:w-5 md:h-5" />
               </button>
             </div>
             
-            <div className="p-8 md:p-10 space-y-6 relative z-10">
+            <div className="p-4 md:p-10 space-y-4 md:space-y-6 relative z-10">
               {patientHistory.length === 0 ? (
-                <div className="flex flex-col items-center justify-center py-16 bg-white/30 backdrop-blur-md rounded-[2rem] border-[1.5px] border-white/50 shadow-inner">
-                   <div className="w-16 h-16 bg-white/50 rounded-full flex items-center justify-center mb-4 shadow-sm border border-white/70">
-                     <History className="w-8 h-8 text-teal-600/50" />
+                <div className="flex flex-col items-center justify-center py-10 md:py-16 bg-white/30 backdrop-blur-md rounded-[1.5rem] md:rounded-[2rem] border-[1.5px] border-white/50 shadow-inner">
+                   <div className="w-12 h-12 md:w-16 md:h-16 bg-white/50 rounded-full flex items-center justify-center mb-3 md:mb-4 shadow-sm border border-white/70">
+                     <History className="w-6 h-6 md:w-8 md:h-8 text-teal-600/50" />
                    </div>
-                   <p className="text-lg font-black text-teal-950">No History Found</p>
-                   <p className="text-[10px] font-bold text-teal-900/60 uppercase tracking-widest mt-1">Patient hasn't submitted feedback yet.</p>
+                   <p className="text-base md:text-lg font-black text-teal-950">No History Found</p>
+                   <p className="text-[9px] md:text-[10px] font-bold text-teal-900/60 uppercase tracking-widest mt-1 text-center">Patient hasn't submitted feedback yet.</p>
                 </div>
               ) : patientHistory.map(sess => (
-                <div key={sess._id} className="bg-white/40 backdrop-blur-md border-[1.5px] border-white/60 shadow-[0_4px_20px_rgba(0,0,0,0.03)] rounded-[2rem] overflow-hidden group hover:bg-white/50 transition-colors">
-                   <div className="bg-white/30 px-6 py-4 border-b border-white/50 flex justify-between items-center relative z-10">
-                      <span className="font-black text-sm text-teal-950 flex items-center gap-2"><Calendar className="w-4 h-4 text-teal-700"/> {new Date(sess.respondedAt).toLocaleDateString("en-IN", { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' })}</span>
-                      <Badge className="bg-emerald-500/20 text-emerald-950 border border-emerald-400/50 shadow-none px-3 py-1 uppercase tracking-widest text-[9px] flex items-center gap-1.5"><CheckCircle2 className="w-3 h-3"/> Completed</Badge>
+                <div key={sess._id} className="bg-white/40 backdrop-blur-md border-[1.5px] border-white/60 shadow-[0_4px_20px_rgba(0,0,0,0.03)] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden group hover:bg-white/50 transition-colors">
+                   <div className="bg-white/30 px-4 md:px-6 py-3 md:py-4 border-b border-white/50 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 relative z-10">
+                      <span className="font-black text-xs md:text-sm text-teal-950 flex items-center gap-2"><Calendar className="w-3.5 h-3.5 md:w-4 md:h-4 text-teal-700"/> {new Date(sess.respondedAt).toLocaleDateString("en-IN", { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' })}</span>
+                      <Badge className="bg-emerald-500/20 text-emerald-950 border border-emerald-400/50 shadow-none px-2 md:px-3 py-1 uppercase tracking-widest text-[8px] md:text-[9px] flex items-center gap-1.5 w-fit"><CheckCircle2 className="w-3 h-3"/> Completed</Badge>
                    </div>
-                   <div className="p-6 space-y-4 relative z-10">
+                   <div className="p-4 md:p-6 space-y-3 md:space-y-4 relative z-10">
                       {sess.questions.map((q, i) => (
-                         <div key={i} className="flex justify-between items-start gap-4 p-4 rounded-2xl bg-white/30 border border-white/50 shadow-sm">
-                            <span className="text-sm font-bold text-teal-950 leading-relaxed flex-1">{q.text}</span>
-                            <div className="px-4 py-1.5 rounded-xl bg-white/60 border border-white/80 font-black text-teal-950 text-sm shadow-sm whitespace-nowrap">
+                         <div key={i} className="flex flex-col sm:flex-row justify-between sm:items-start gap-3 p-3 md:p-4 rounded-xl md:rounded-2xl bg-white/30 border border-white/50 shadow-sm w-full">
+                            <span className="text-xs md:text-sm font-bold text-teal-950 leading-relaxed flex-1 w-full">{q.text}</span>
+                            <div className="px-3 md:px-4 py-1.5 rounded-lg md:rounded-xl bg-white/60 border border-white/80 font-black text-teal-950 text-xs md:text-sm shadow-sm whitespace-nowrap w-fit">
                               {String(q.answer)}
                             </div>
                          </div>
@@ -472,82 +472,84 @@ export default function FeedbackTab() {
         </DialogContent>
       </Dialog>
 
-      {/* --- MODAL 3: TEMPLATES (GLASSMORPHISM) --- */}
+      {/* --- MODAL 3: TEMPLATES (FIXED FOR MOBILE RESPONSIVENESS) --- */}
       <Dialog open={isTemplateOpen} onOpenChange={setIsTemplateOpen}>
-        <DialogContent className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] max-w-5xl w-[90vw] max-h-[90vh] overflow-y-auto overflow-x-hidden p-0 bg-white/30 backdrop-blur-[50px] border-[1.5px] border-white/60 shadow-[0_30px_80px_rgba(0,0,0,0.3)] rounded-[3rem] [&::-webkit-scrollbar]:hidden z-[100] [&>button]:hidden">
+        <DialogContent className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] max-w-5xl w-[95vw] md:w-[90vw] max-h-[90vh] overflow-y-auto overflow-x-hidden p-0 bg-white/30 backdrop-blur-[50px] border-[1.5px] border-white/60 shadow-[0_30px_80px_rgba(0,0,0,0.3)] rounded-[2rem] md:rounded-[3rem] [&::-webkit-scrollbar]:hidden z-[100] [&>button]:hidden">
           
           <div className="relative">
-            <div className="p-8 md:p-10 border-b border-white/30 flex items-center justify-between gap-6 relative overflow-hidden bg-white/10" style={{ background: 'linear-gradient(135deg, rgba(20,184,166,0.2) 0%, rgba(255,255,255,0.05) 100%)' }}>
+            <div className="p-6 md:p-10 border-b border-white/30 flex items-center justify-between gap-4 md:gap-6 relative overflow-hidden bg-white/10" style={{ background: 'linear-gradient(135deg, rgba(20,184,166,0.2) 0%, rgba(255,255,255,0.05) 100%)' }}>
               <div className="absolute top-0 right-0 w-64 h-64 bg-teal-400/20 rounded-full blur-[60px] pointer-events-none -z-10"></div>
               
-              <div className="flex items-center gap-4 relative z-10">
-                <div className="w-14 h-14 bg-white/40 backdrop-blur-md rounded-2xl border-[1.5px] border-white/70 shadow-sm flex items-center justify-center shrink-0">
-                  <Settings className="w-6 h-6 text-teal-800 drop-shadow-sm" />
+              <div className="flex items-center gap-3 md:gap-4 relative z-10">
+                <div className="w-10 h-10 md:w-14 md:h-14 bg-white/40 backdrop-blur-md rounded-xl md:rounded-2xl border-[1.5px] border-white/70 shadow-sm flex items-center justify-center shrink-0">
+                  <Settings className="w-5 h-5 md:w-6 md:h-6 text-teal-800 drop-shadow-sm" />
                 </div>
                 <div>
-                  <DialogTitle className="text-3xl font-black text-teal-950 tracking-tight leading-none mb-1.5 drop-shadow-sm">Global Templates</DialogTitle>
-                  <DialogDescription className="text-[10px] font-black uppercase tracking-widest text-teal-900/60">Configure default questions for all patients</DialogDescription>
+                  <DialogTitle className="text-xl md:text-3xl font-black text-teal-950 tracking-tight leading-none mb-1 drop-shadow-sm">Templates</DialogTitle>
+                  <DialogDescription className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-teal-900/60 hidden sm:block">Configure default questions for all patients</DialogDescription>
                 </div>
               </div>
-              <button onClick={() => setIsTemplateOpen(false)} className="text-teal-900 hover:text-teal-950 transition-colors bg-white/40 rounded-full p-2.5 backdrop-blur-md border border-white/50 shadow-sm relative z-50">
-                 <X className="w-5 h-5" />
+              <button onClick={() => setIsTemplateOpen(false)} className="text-teal-900 hover:text-teal-950 transition-colors bg-white/40 rounded-full p-2 backdrop-blur-md border border-white/50 shadow-sm relative z-50 shrink-0">
+                 <X className="w-4 h-4 md:w-5 md:h-5" />
               </button>
             </div>
             
-            <div className="p-8 md:p-10 relative z-10">
-              <Tabs defaultValue="general" className="w-full">
-                <TabsList className="flex w-full max-w-md mx-auto bg-white/30 backdrop-blur-xl p-1.5 rounded-full mb-10 border-[1.5px] border-white/60 shadow-[0_8px_30px_rgba(0,0,0,0.05)] h-14">
-                  <TabsTrigger value="general" className="flex-1 rounded-full font-black text-sm uppercase tracking-widest data-[state=active]:bg-gradient-to-r data-[state=active]:from-teal-500 data-[state=active]:to-teal-400 data-[state=active]:text-white data-[state=active]:shadow-md transition-all text-teal-900/60 h-full">
+            <div className="p-4 md:p-10 relative z-10">
+              <Tabs defaultValue="general" className="w-full flex flex-col">
+                <TabsList className="flex flex-col sm:flex-row w-full max-w-md mx-auto bg-white/30 backdrop-blur-xl p-1.5 rounded-2xl sm:rounded-full mb-6 md:mb-10 border-[1.5px] border-white/60 shadow-[0_8px_30px_rgba(0,0,0,0.05)] h-auto sm:h-14">
+                  <TabsTrigger value="general" className="w-full sm:flex-1 py-3 sm:py-0 rounded-xl sm:rounded-full font-black text-[10px] sm:text-sm uppercase tracking-widest data-[state=active]:bg-gradient-to-r data-[state=active]:from-teal-500 data-[state=active]:to-teal-400 data-[state=active]:text-white data-[state=active]:shadow-md transition-all text-teal-900/60 h-full">
                     General Health
                   </TabsTrigger>
-                  <TabsTrigger value="therapy" className="flex-1 rounded-full font-black text-sm uppercase tracking-widest data-[state=active]:bg-gradient-to-r data-[state=active]:from-teal-500 data-[state=active]:to-teal-400 data-[state=active]:text-white data-[state=active]:shadow-md transition-all text-teal-900/60 h-full">
+                  <TabsTrigger value="therapy" className="w-full sm:flex-1 py-3 sm:py-0 rounded-xl sm:rounded-full font-black text-[10px] sm:text-sm uppercase tracking-widest data-[state=active]:bg-gradient-to-r data-[state=active]:from-teal-500 data-[state=active]:to-teal-400 data-[state=active]:text-white data-[state=active]:shadow-md transition-all text-teal-900/60 h-full mt-1 sm:mt-0">
                     Therapy Specific
                   </TabsTrigger>
                 </TabsList>
                 
                 <TabsContent value="general" className="mt-0">
-                  <div className="bg-white/40 backdrop-blur-md p-8 rounded-[2.5rem] border-[1.5px] border-white/60 shadow-sm">
-                     <div className="space-y-4 mb-6">
+                  <div className="bg-white/40 backdrop-blur-md p-5 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] border-[1.5px] border-white/60 shadow-sm">
+                     <div className="space-y-3 md:space-y-4 mb-5 md:mb-6">
                         {globalGeneral.map((q, idx) => (
-                           <div key={idx} className="flex flex-col sm:flex-row gap-3 items-start sm:items-center bg-white/50 p-3 rounded-[1.25rem] border border-white/70 shadow-sm">
-                              <Badge className="bg-white/80 text-teal-950 border border-white/90 shadow-none px-4 py-2 uppercase tracking-widest text-[10px] shrink-0 w-24 justify-center">{q.type}</Badge>
-                              <Input value={q.text} onChange={(e) => updateGlobalGen(idx, 'text', e.target.value)} className="h-12 bg-white/40 border-[1.5px] border-white/60 rounded-xl font-bold text-teal-950 focus:bg-white/80 transition-colors flex-1 text-base" />
-                              <Button size="icon" variant="ghost" className="h-12 w-12 shrink-0 bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 rounded-xl border border-rose-400/30" onClick={() => setGlobalGeneral(globalGeneral.filter((_, i) => i !== idx))}><Trash2 className="w-5 h-5" /></Button>
+                           <div key={idx} className="flex flex-col sm:flex-row gap-2 md:gap-3 items-start sm:items-center bg-white/50 p-3 rounded-xl md:rounded-[1.25rem] border border-white/70 shadow-sm w-full">
+                              <Badge className="bg-white/80 text-teal-950 border border-white/90 shadow-none px-3 md:px-4 py-1.5 md:py-2 uppercase tracking-widest text-[9px] md:text-[10px] shrink-0 w-full sm:w-24 justify-center">{q.type}</Badge>
+                              <Input value={q.text} onChange={(e) => updateGlobalGen(idx, 'text', e.target.value)} className="h-10 md:h-12 bg-white/40 border-[1.5px] border-white/60 rounded-xl font-bold text-teal-950 focus:bg-white/80 transition-colors flex-1 w-full text-sm md:text-base" />
+                              <Button size="icon" variant="ghost" className="h-10 md:h-12 w-full sm:w-12 shrink-0 bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 rounded-xl border border-rose-400/30" onClick={() => setGlobalGeneral(globalGeneral.filter((_, i) => i !== idx))}><Trash2 className="w-4 h-4 md:w-5 md:h-5" /></Button>
                            </div>
                         ))}
                      </div>
-                     <Button variant="secondary" onClick={addGlobalGen} className="w-full h-14 rounded-[1.25rem] bg-teal-500/20 hover:bg-teal-500/30 text-teal-950 font-black uppercase tracking-widest border-[1.5px] border-teal-400/50 shadow-sm transition-all border-dashed"><Plus className="w-5 h-5 mr-2"/> Add General Question</Button>
+                     <Button variant="secondary" onClick={addGlobalGen} className="w-full h-12 md:h-14 rounded-xl md:rounded-[1.25rem] bg-teal-500/20 hover:bg-teal-500/30 text-teal-950 font-black text-xs md:text-sm uppercase tracking-widest border-[1.5px] border-teal-400/50 shadow-sm transition-all border-dashed"><Plus className="w-4 h-4 md:w-5 md:h-5 mr-2"/> Add General Question</Button>
                   </div>
                 </TabsContent>
                 
-                <TabsContent value="therapy" className="mt-0">
-                  <div className="bg-white/40 backdrop-blur-md p-6 md:p-8 rounded-[2.5rem] border-[1.5px] border-white/60 shadow-sm">
-                     <Tabs defaultValue="Vamana" className="w-full flex flex-col md:flex-row gap-8">
-                        <TabsList className="flex flex-row md:flex-col h-auto w-full md:w-56 bg-white/30 backdrop-blur-md p-2 rounded-[1.5rem] border-[1.5px] border-white/50 shadow-inner gap-2 overflow-x-auto md:overflow-visible">
+                <TabsContent value="therapy" className="mt-0 w-full">
+                  <div className="bg-white/40 backdrop-blur-md p-4 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] border-[1.5px] border-white/60 shadow-sm w-full">
+                     <Tabs defaultValue="Vamana" className="w-full flex flex-col md:flex-row gap-4 md:gap-8">
+                        
+                        {/* 🚨 CHANGED HERE: Made TabList wrap nicely on mobile */}
+                        <TabsList className="flex flex-row md:flex-col h-auto w-full md:w-56 bg-white/30 backdrop-blur-md p-2 rounded-2xl md:rounded-[1.5rem] border-[1.5px] border-white/50 shadow-inner gap-2 overflow-x-auto flex-nowrap md:flex-wrap pb-3 md:pb-2 scrollbar-hide">
                            {THERAPY_TYPES.map(t => 
-                             <TabsTrigger key={t} value={t} className="w-full justify-start px-5 py-4 rounded-xl font-black text-xs uppercase tracking-widest data-[state=active]:bg-white/80 data-[state=active]:text-teal-950 data-[state=active]:shadow-sm text-teal-900/60 transition-all border-[1.5px] border-transparent data-[state=active]:border-white/90">
+                             <TabsTrigger key={t} value={t} className="w-fit md:w-full justify-center md:justify-start px-4 md:px-5 py-2.5 md:py-4 rounded-xl font-black text-[10px] md:text-xs uppercase tracking-widest data-[state=active]:bg-white/80 data-[state=active]:text-teal-950 data-[state=active]:shadow-sm text-teal-900/60 transition-all border-[1.5px] border-transparent data-[state=active]:border-white/90 whitespace-nowrap">
                                {t}
                              </TabsTrigger>
                            )}
                         </TabsList>
                         
-                        <div className="flex-1">
+                        <div className="flex-1 w-full min-w-0">
                           {THERAPY_TYPES.map(t => (
-                             <TabsContent key={t} value={t} className="space-y-6 mt-0">
-                                <h3 className="font-black text-xl text-teal-950 drop-shadow-sm mb-4 border-b-[1.5px] border-white/50 pb-4">{t} Questions</h3>
-                                <div className="space-y-4 mb-6">
+                             <TabsContent key={t} value={t} className="space-y-4 md:space-y-6 mt-0 w-full">
+                                <h3 className="font-black text-lg md:text-xl text-teal-950 drop-shadow-sm mb-3 md:mb-4 border-b-[1.5px] border-white/50 pb-2 md:pb-4">{t} Questions</h3>
+                                <div className="space-y-3 md:space-y-4 mb-4 md:mb-6 w-full">
                                   {(globalTherapy[t] || []).map((q, idx) => (
-                                     <div key={idx} className="flex flex-col sm:flex-row gap-3 items-start sm:items-center bg-white/50 p-3 rounded-[1.25rem] border border-white/70 shadow-sm">
-                                        <Badge className="bg-white/80 text-teal-950 border border-white/90 shadow-none px-4 py-2 uppercase tracking-widest text-[10px] shrink-0 w-24 justify-center">{q.type}</Badge>
-                                        <Input value={q.text} onChange={(e) => { const n=[...(globalTherapy[t]||[])]; n[idx].text=e.target.value; setGlobalTherapy({...globalTherapy,[t]:n}); }} className="h-12 bg-white/40 border-[1.5px] border-white/60 rounded-xl font-bold text-teal-950 focus:bg-white/80 transition-colors flex-1 text-base" />
-                                        <Button size="icon" variant="ghost" className="h-12 w-12 shrink-0 bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 rounded-xl border border-rose-400/30" onClick={() => { const n=(globalTherapy[t]||[]).filter((_,i)=>i!==idx); setGlobalTherapy({...globalTherapy,[t]:n}); }}><Trash2 className="w-5 h-5" /></Button>
+                                     <div key={idx} className="flex flex-col sm:flex-row gap-2 md:gap-3 items-start sm:items-center bg-white/50 p-3 rounded-xl md:rounded-[1.25rem] border border-white/70 shadow-sm w-full">
+                                        <Badge className="bg-white/80 text-teal-950 border border-white/90 shadow-none px-3 md:px-4 py-1.5 md:py-2 uppercase tracking-widest text-[9px] md:text-[10px] shrink-0 w-full sm:w-24 justify-center">{q.type}</Badge>
+                                        <Input value={q.text} onChange={(e) => { const n=[...(globalTherapy[t]||[])]; n[idx].text=e.target.value; setGlobalTherapy({...globalTherapy,[t]:n}); }} className="h-10 md:h-12 bg-white/40 border-[1.5px] border-white/60 rounded-xl font-bold text-teal-950 focus:bg-white/80 transition-colors flex-1 w-full text-sm md:text-base" />
+                                        <Button size="icon" variant="ghost" className="h-10 md:h-12 w-full sm:w-12 shrink-0 bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 rounded-xl border border-rose-400/30" onClick={() => { const n=(globalTherapy[t]||[]).filter((_,i)=>i!==idx); setGlobalTherapy({...globalTherapy,[t]:n}); }}><Trash2 className="w-4 h-4 md:w-5 md:h-5" /></Button>
                                      </div>
                                   ))}
                                   {(globalTherapy[t] || []).length === 0 && (
-                                    <div className="text-center py-10 text-teal-900/50 text-xs font-bold uppercase tracking-widest bg-white/30 rounded-[1.5rem] border-[2px] border-dashed border-white/60">No template questions for {t}.</div>
+                                    <div className="text-center py-6 md:py-10 text-teal-900/50 text-[10px] md:text-xs font-bold uppercase tracking-widest bg-white/30 rounded-xl md:rounded-[1.5rem] border-[2px] border-dashed border-white/60">No template questions for {t}.</div>
                                   )}
                                 </div>
-                                <Button variant="secondary" onClick={() => { const n=[...(globalTherapy[t]||[]), {type:'scale',text:'New Question'}]; setGlobalTherapy({...globalTherapy,[t]:n}); }} className="w-full h-14 rounded-[1.25rem] bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-950 font-black uppercase tracking-widest border-[1.5px] border-indigo-400/30 shadow-sm transition-all border-dashed"><Plus className="w-5 h-5 mr-2"/> Add to {t}</Button>
+                                <Button variant="secondary" onClick={() => { const n=[...(globalTherapy[t]||[]), {type:'scale',text:'New Question'}]; setGlobalTherapy({...globalTherapy,[t]:n}); }} className="w-full h-12 md:h-14 rounded-xl md:rounded-[1.25rem] bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-950 font-black text-xs md:text-sm uppercase tracking-widest border-[1.5px] border-indigo-400/30 shadow-sm transition-all border-dashed"><Plus className="w-4 h-4 md:w-5 md:h-5 mr-2"/> Add to {t}</Button>
                              </TabsContent>
                           ))}
                         </div>
@@ -557,9 +559,9 @@ export default function FeedbackTab() {
               </Tabs>
             </div>
             
-            <div className="p-8 bg-white/20 border-t-[1.5px] border-white/40 flex justify-end gap-4">
-               <Button onClick={() => setIsTemplateOpen(false)} variant="outline" className="bg-white/50 hover:bg-white/70 border-[1.5px] border-white/80 text-teal-950 shadow-sm h-14 px-8 rounded-full font-black uppercase tracking-widest transition-all">Cancel</Button>
-               <Button onClick={saveGlobalTemplates} className="bg-gradient-to-r from-teal-600 to-emerald-500 hover:from-teal-500 hover:to-emerald-400 text-white shadow-[0_8px_20px_rgba(20,184,166,0.3)] h-14 px-10 rounded-full font-black uppercase tracking-widest transition-all hover:scale-[1.02] hover:-translate-y-0.5"><Save className="w-5 h-5 mr-2" /> Save Templates</Button>
+            <div className="p-4 md:p-8 bg-white/20 border-t-[1.5px] border-white/40 flex flex-col sm:flex-row justify-end gap-3 md:gap-4">
+               <Button onClick={() => setIsTemplateOpen(false)} variant="outline" className="w-full sm:w-auto bg-white/50 hover:bg-white/70 border-[1.5px] border-white/80 text-teal-950 shadow-sm h-12 md:h-14 px-6 md:px-8 rounded-full font-black uppercase tracking-widest transition-all">Cancel</Button>
+               <Button onClick={saveGlobalTemplates} className="w-full sm:w-auto bg-gradient-to-r from-teal-600 to-emerald-500 hover:from-teal-500 hover:to-emerald-400 text-white shadow-[0_8px_20px_rgba(20,184,166,0.3)] h-12 md:h-14 px-8 md:px-10 rounded-full font-black uppercase tracking-widest transition-all hover:scale-[1.02] hover:-translate-y-0.5"><Save className="w-4 h-4 md:w-5 md:h-5 mr-2" /> Save Templates</Button>
             </div>
           </div>
         </DialogContent>
