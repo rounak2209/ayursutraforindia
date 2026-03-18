@@ -360,7 +360,6 @@ export default function TherapistDashboard() {
                 </h3>
               </div>
               <div className="p-4 md:p-8 relative z-10">
-                {/* 🚨 CHANGED HERE: Added w-full, overflow-x-auto, and reduced padding for mobile */}
                 <div className="bg-white/40 backdrop-blur-md border-[1.5px] border-white/60 rounded-[2rem] p-2 md:p-6 shadow-sm w-full overflow-x-auto flex justify-center">
                   <div className="min-w-fit">
                     <Calendar

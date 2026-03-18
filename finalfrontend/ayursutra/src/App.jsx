@@ -24,15 +24,13 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <>
-    {/* ✅ 2. FIXED GLOBAL BACKGROUND FOR GLASSMORPHISM */}
+
     <div 
-      className="fixed top-0 left-0 w-full h-[120vh] bg-[#efe7d3] -z-50 pointer-events-none"
+
+      className="fixed top-0 left-0 w-full h-[120vh] bg-[#efe7d3] -z-50 pointer-events-none bg-cover bg-no-repeat bg-[83%_center] md:bg-[80%_center] xl:bg-center"
       style={{
-        backgroundImage: `url(${bgImage})`,
-        backgroundSize: 'cover',
-        // FIX: Changed backgroundPosition to 'right' to align with the right edge
-        backgroundPosition: 'right', 
-        backgroundRepeat: 'no-repeat'
+        backgroundImage: `url(${bgImage})`
+
       }}
     />
 
@@ -65,8 +63,6 @@ const App = () => (
               }
             />
 
-            
-            
             {/* === THERAPIST ROUTES === */}
             <Route
               path="/therapist/*"

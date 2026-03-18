@@ -327,7 +327,7 @@ export default function FeedbackTab() {
       <Dialog open={isRequestOpen} onOpenChange={setIsRequestOpen}>
         <DialogContent className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] max-w-4xl w-[95vw] md:w-[90vw] max-h-[90vh] overflow-y-auto overflow-x-hidden p-0 bg-white/30 backdrop-blur-[50px] border-[1.5px] border-white/60 shadow-[0_30px_80px_rgba(0,0,0,0.3)] rounded-[2rem] md:rounded-[3rem] [&::-webkit-scrollbar]:hidden z-[100] [&>button]:hidden">
           
-          <div className="relative">
+          <div className="relative w-full min-w-0">
             <div className="p-6 md:p-10 border-b border-white/30 flex items-center justify-between gap-4 md:gap-6 relative overflow-hidden bg-white/10" style={{ background: 'linear-gradient(135deg, rgba(20,184,166,0.2) 0%, rgba(255,255,255,0.05) 100%)' }}>
               <div className="absolute top-0 right-0 w-64 h-64 bg-teal-400/20 rounded-full blur-[60px] pointer-events-none -z-10"></div>
               
@@ -422,7 +422,7 @@ export default function FeedbackTab() {
       <Dialog open={isHistoryOpen} onOpenChange={setIsHistoryOpen}>
         <DialogContent className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] max-w-3xl w-[95vw] md:w-[90vw] max-h-[85vh] overflow-y-auto overflow-x-hidden p-0 bg-white/30 backdrop-blur-[50px] border-[1.5px] border-white/60 shadow-[0_30px_80px_rgba(0,0,0,0.3)] rounded-[2rem] md:rounded-[3rem] [&::-webkit-scrollbar]:hidden z-[100] [&>button]:hidden">
           
-          <div className="relative">
+          <div className="relative w-full min-w-0">
             <div className="p-6 md:p-10 border-b border-white/30 flex items-center justify-between gap-4 md:gap-6 relative overflow-hidden bg-white/10" style={{ background: 'linear-gradient(135deg, rgba(20,184,166,0.2) 0%, rgba(255,255,255,0.05) 100%)' }}>
               <div className="absolute top-0 right-0 w-64 h-64 bg-teal-400/20 rounded-full blur-[60px] pointer-events-none -z-10"></div>
               
@@ -476,7 +476,7 @@ export default function FeedbackTab() {
       <Dialog open={isTemplateOpen} onOpenChange={setIsTemplateOpen}>
         <DialogContent className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] max-w-5xl w-[95vw] md:w-[90vw] max-h-[90vh] overflow-y-auto overflow-x-hidden p-0 bg-white/30 backdrop-blur-[50px] border-[1.5px] border-white/60 shadow-[0_30px_80px_rgba(0,0,0,0.3)] rounded-[2rem] md:rounded-[3rem] [&::-webkit-scrollbar]:hidden z-[100] [&>button]:hidden">
           
-          <div className="relative">
+          <div className="relative w-full min-w-0">
             <div className="p-6 md:p-10 border-b border-white/30 flex items-center justify-between gap-4 md:gap-6 relative overflow-hidden bg-white/10" style={{ background: 'linear-gradient(135deg, rgba(20,184,166,0.2) 0%, rgba(255,255,255,0.05) 100%)' }}>
               <div className="absolute top-0 right-0 w-64 h-64 bg-teal-400/20 rounded-full blur-[60px] pointer-events-none -z-10"></div>
               
@@ -494,8 +494,8 @@ export default function FeedbackTab() {
               </button>
             </div>
             
-            <div className="p-4 md:p-10 relative z-10 w-full overflow-hidden">
-              <Tabs defaultValue="general" className="w-full flex flex-col max-w-full">
+            <div className="p-4 md:p-10 relative z-10 w-full min-w-0">
+              <Tabs defaultValue="general" className="w-full flex flex-col min-w-0">
                 <TabsList className="flex flex-col sm:flex-row w-full max-w-md mx-auto bg-white/30 backdrop-blur-xl p-1.5 rounded-2xl sm:rounded-full mb-6 md:mb-10 border-[1.5px] border-white/60 shadow-[0_8px_30px_rgba(0,0,0,0.05)] h-auto sm:h-14">
                   <TabsTrigger value="general" className="w-full sm:flex-1 py-3 sm:py-0 rounded-xl sm:rounded-full font-black text-[10px] sm:text-sm uppercase tracking-widest data-[state=active]:bg-gradient-to-r data-[state=active]:from-teal-500 data-[state=active]:to-teal-400 data-[state=active]:text-white data-[state=active]:shadow-md transition-all text-teal-900/60 h-full">
                     General Health
@@ -505,11 +505,11 @@ export default function FeedbackTab() {
                   </TabsTrigger>
                 </TabsList>
                 
-                <TabsContent value="general" className="mt-0 w-full max-w-full">
-                  <div className="bg-white/40 backdrop-blur-md p-5 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] border-[1.5px] border-white/60 shadow-sm w-full max-w-full overflow-hidden">
-                     <div className="space-y-3 md:space-y-4 mb-5 md:mb-6 w-full max-w-full">
+                <TabsContent value="general" className="mt-0 w-full min-w-0">
+                  <div className="bg-white/40 backdrop-blur-md p-5 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] border-[1.5px] border-white/60 shadow-sm w-full min-w-0 overflow-hidden">
+                     <div className="space-y-3 md:space-y-4 mb-5 md:mb-6 w-full min-w-0">
                         {globalGeneral.map((q, idx) => (
-                           <div key={idx} className="flex flex-col sm:flex-row gap-2 md:gap-3 items-start sm:items-center bg-white/50 p-3 rounded-xl md:rounded-[1.25rem] border border-white/70 shadow-sm w-full max-w-full overflow-hidden">
+                           <div key={idx} className="flex flex-col sm:flex-row gap-2 md:gap-3 items-start sm:items-center bg-white/50 p-3 rounded-xl md:rounded-[1.25rem] border border-white/70 shadow-sm w-full min-w-0 overflow-hidden">
                               <Badge className="bg-white/80 text-teal-950 border border-white/90 shadow-none px-3 md:px-4 py-1.5 md:py-2 uppercase tracking-widest text-[9px] md:text-[10px] shrink-0 w-full sm:w-24 justify-center">{q.type}</Badge>
                               <Input value={q.text} onChange={(e) => updateGlobalGen(idx, 'text', e.target.value)} className="h-10 md:h-12 bg-white/40 border-[1.5px] border-white/60 rounded-xl font-bold text-teal-950 focus:bg-white/80 transition-colors flex-1 w-full min-w-0 text-sm md:text-base" />
                               <Button size="icon" variant="ghost" className="h-10 md:h-12 w-full sm:w-12 shrink-0 bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 rounded-xl border border-rose-400/30" onClick={() => setGlobalGeneral(globalGeneral.filter((_, i) => i !== idx))}><Trash2 className="w-4 h-4 md:w-5 md:h-5" /></Button>
@@ -520,25 +520,28 @@ export default function FeedbackTab() {
                   </div>
                 </TabsContent>
                 
-                <TabsContent value="therapy" className="mt-0 w-full max-w-full">
-                  <div className="bg-white/40 backdrop-blur-md p-4 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] border-[1.5px] border-white/60 shadow-sm w-full max-w-full overflow-hidden">
-                     <Tabs defaultValue="Vamana" className="w-full flex flex-col md:flex-row gap-4 md:gap-8 max-w-full">
+                <TabsContent value="therapy" className="mt-0 w-full min-w-0">
+                  <div className="bg-white/40 backdrop-blur-md p-4 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] border-[1.5px] border-white/60 shadow-sm w-full min-w-0 overflow-hidden">
+                     <Tabs defaultValue="Vamana" className="w-full flex flex-col md:flex-row gap-4 md:gap-8 min-w-0">
                         
-                        <TabsList className="flex flex-row md:flex-col h-auto w-full max-w-full md:w-56 bg-white/30 backdrop-blur-md p-2 rounded-2xl md:rounded-[1.5rem] border-[1.5px] border-white/50 shadow-inner gap-2 overflow-x-auto flex-nowrap pb-3 md:pb-2 scrollbar-hide shrink-0">
-                           {THERAPY_TYPES.map(t => 
-                             <TabsTrigger key={t} value={t} className="w-fit md:w-full justify-center md:justify-start px-4 md:px-5 py-2.5 md:py-4 rounded-xl font-black text-[10px] md:text-xs uppercase tracking-widest data-[state=active]:bg-white/80 data-[state=active]:text-teal-950 data-[state=active]:shadow-sm text-teal-900/60 transition-all border-[1.5px] border-transparent data-[state=active]:border-white/90 whitespace-nowrap shrink-0">
-                               {t}
-                             </TabsTrigger>
-                           )}
-                        </TabsList>
+                       
+                        <div className="w-full min-w-0 overflow-hidden md:w-56 shrink-0">
+                           <TabsList className="flex flex-row md:flex-col h-auto w-full bg-white/30 backdrop-blur-md p-2 rounded-2xl md:rounded-[1.5rem] border-[1.5px] border-white/50 shadow-inner gap-2 overflow-x-auto flex-nowrap pb-3 md:pb-2 scrollbar-hide">
+                              {THERAPY_TYPES.map(t => 
+                                <TabsTrigger key={t} value={t} className="w-fit md:w-full justify-center md:justify-start px-4 md:px-5 py-2.5 md:py-4 rounded-xl font-black text-[10px] md:text-xs uppercase tracking-widest data-[state=active]:bg-white/80 data-[state=active]:text-teal-950 data-[state=active]:shadow-sm text-teal-900/60 transition-all border-[1.5px] border-transparent data-[state=active]:border-white/90 whitespace-nowrap shrink-0">
+                                  {t}
+                                </TabsTrigger>
+                              )}
+                           </TabsList>
+                        </div>
                         
-                        <div className="flex-1 w-full min-w-0 max-w-full">
+                        <div className="flex-1 w-full min-w-0 overflow-hidden">
                           {THERAPY_TYPES.map(t => (
-                             <TabsContent key={t} value={t} className="space-y-4 md:space-y-6 mt-0 w-full max-w-full">
+                             <TabsContent key={t} value={t} className="space-y-4 md:space-y-6 mt-0 w-full min-w-0">
                                 <h3 className="font-black text-lg md:text-xl text-teal-950 drop-shadow-sm mb-3 md:mb-4 border-b-[1.5px] border-white/50 pb-2 md:pb-4 truncate">{t} Questions</h3>
-                                <div className="space-y-3 md:space-y-4 mb-4 md:mb-6 w-full max-w-full">
+                                <div className="space-y-3 md:space-y-4 mb-4 md:mb-6 w-full min-w-0">
                                   {(globalTherapy[t] || []).map((q, idx) => (
-                                     <div key={idx} className="flex flex-col sm:flex-row gap-2 md:gap-3 items-start sm:items-center bg-white/50 p-3 rounded-xl md:rounded-[1.25rem] border border-white/70 shadow-sm w-full max-w-full overflow-hidden">
+                                     <div key={idx} className="flex flex-col sm:flex-row gap-2 md:gap-3 items-start sm:items-center bg-white/50 p-3 rounded-xl md:rounded-[1.25rem] border border-white/70 shadow-sm w-full min-w-0 overflow-hidden">
                                         <Badge className="bg-white/80 text-teal-950 border border-white/90 shadow-none px-3 md:px-4 py-1.5 md:py-2 uppercase tracking-widest text-[9px] md:text-[10px] shrink-0 w-full sm:w-24 justify-center">{q.type}</Badge>
                                         <Input value={q.text} onChange={(e) => { const n=[...(globalTherapy[t]||[])]; n[idx].text=e.target.value; setGlobalTherapy({...globalTherapy,[t]:n}); }} className="h-10 md:h-12 bg-white/40 border-[1.5px] border-white/60 rounded-xl font-bold text-teal-950 focus:bg-white/80 transition-colors flex-1 w-full min-w-0 text-sm md:text-base" />
                                         <Button size="icon" variant="ghost" className="h-10 md:h-12 w-full sm:w-12 shrink-0 bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 rounded-xl border border-rose-400/30" onClick={() => { const n=(globalTherapy[t]||[]).filter((_,i)=>i!==idx); setGlobalTherapy({...globalTherapy,[t]:n}); }}><Trash2 className="w-4 h-4 md:w-5 md:h-5" /></Button>
