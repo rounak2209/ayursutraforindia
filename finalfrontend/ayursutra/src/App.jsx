@@ -60,7 +60,7 @@ const App = () => (
               path="/patient/profile"
               element={
                 <ProtectedRoute allowedRoles="patient">
-                  <PatientProfileForm onComplete={() => (window.location.href = "/patient")} />
+                  <PatientProfileForm />
                 </ProtectedRoute>
               }
             />
@@ -80,7 +80,7 @@ const App = () => (
               path="/therapist/profile"
               element={
                 <ProtectedRoute allowedRoles="therapist">
-                  <TherapistProfileForm onProfileComplete={() => (window.location.href = '/therapist')} />
+                  <TherapistProfileForm  />
                 </ProtectedRoute>
               }
             />

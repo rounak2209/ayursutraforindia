@@ -7,8 +7,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
 import { apiPut, apiPutMultipart } from "@/lib/api"; 
 import { Upload, User, Phone, Activity, FileText, Plus, Trash2, ShieldAlert, Sparkles } from "lucide-react";
+import { useNavigate } from "react-router-dom"; 
 
 export default function PatientProfileForm({ onComplete }) {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     age: "",
@@ -105,10 +107,16 @@ export default function PatientProfileForm({ onComplete }) {
       };
 
       await apiPut(`/api/patients/profile/${userId}`, jsonPayload);
-      
+      const userStr = localStorage.getItem("user");
+      if (userStr) {
+        const userObj = JSON.parse(userStr);
+        userObj.profileStatus = "completed"; 
+        localStorage.setItem("user", JSON.stringify(userObj));
+      }
       toast({ title: "Profile saved", description: "Welcome — profile complete." });
 
-      if (typeof onComplete === "function") onComplete(formData);
+      // if (typeof onComplete === "function") onComplete(formData);
+      navigate("/patient");
 
     } catch (err) {
       toast({ title: "Save failed", description: err.message || "Server error", variant: "destructive" });

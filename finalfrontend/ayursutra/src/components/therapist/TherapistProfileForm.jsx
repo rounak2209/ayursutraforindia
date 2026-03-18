@@ -130,6 +130,13 @@ const TherapistProfileForm = ({ onProfileComplete }) => {
       };
 
       await apiPut(`/api/therapists/profile/${userId}`, jsonPayload);
+      
+      const userStr = localStorage.getItem("user");
+      if (userStr) {
+        const userObj = JSON.parse(userStr);
+        userObj.profileStatus = "completed"; 
+        localStorage.setItem("user", JSON.stringify(userObj));
+      }
 
       if (onProfileComplete) onProfileComplete();
       else navigate("/therapist/dashboard");
