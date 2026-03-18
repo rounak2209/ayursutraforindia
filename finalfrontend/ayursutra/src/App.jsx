@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -6,9 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-
 import bgImage from "./assets/hero-background.jpg";
-
 
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
@@ -16,11 +13,9 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import ProtectedRoute from "./components/ProtectedRoute";
 
-//  Patient components
+// Patient components
 import PatientRouteWrapper from "./components/patient/PatientRouteWrapper";
 import PatientProfileForm from "./components/patient/PatientProfileForm";
-
-
 
 import TherapistProfileForm from "./components/therapist/TherapistProfileForm";
 import TherapistRouteWrapper from "./components/therapist/TherapistRouteWrapper";
@@ -35,7 +30,8 @@ const App = () => (
       style={{
         backgroundImage: `url(${bgImage})`,
         backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        // FIX: Changed backgroundPosition to 'right' to align with the right edge
+        backgroundPosition: 'right', 
         backgroundRepeat: 'no-repeat'
       }}
     />
