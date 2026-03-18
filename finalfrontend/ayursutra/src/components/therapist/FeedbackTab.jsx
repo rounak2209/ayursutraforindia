@@ -331,13 +331,13 @@ export default function FeedbackTab() {
             <div className="p-6 md:p-10 border-b border-white/30 flex items-center justify-between gap-4 md:gap-6 relative overflow-hidden bg-white/10" style={{ background: 'linear-gradient(135deg, rgba(20,184,166,0.2) 0%, rgba(255,255,255,0.05) 100%)' }}>
               <div className="absolute top-0 right-0 w-64 h-64 bg-teal-400/20 rounded-full blur-[60px] pointer-events-none -z-10"></div>
               
-              <div className="flex items-center gap-3 md:gap-4 relative z-10">
+              <div className="flex items-center gap-3 md:gap-4 relative z-10 w-full min-w-0">
                 <div className="w-10 h-10 md:w-14 md:h-14 bg-white/40 backdrop-blur-md rounded-xl md:rounded-2xl border-[1.5px] border-white/70 shadow-sm flex items-center justify-center shrink-0">
                   <Send className="w-5 h-5 md:w-6 md:h-6 text-teal-800 drop-shadow-sm" />
                 </div>
-                <div>
-                  <DialogTitle className="text-xl md:text-3xl font-black text-teal-950 tracking-tight leading-none mb-1 drop-shadow-sm">Request Feedback</DialogTitle>
-                  <DialogDescription className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-teal-900/60">For {selectedPatient?.patient?.name}</DialogDescription>
+                <div className="min-w-0 flex-1">
+                  <DialogTitle className="text-xl md:text-3xl font-black text-teal-950 tracking-tight leading-none mb-1 drop-shadow-sm truncate">Request Feedback</DialogTitle>
+                  <DialogDescription className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-teal-900/60 truncate">For {selectedPatient?.patient?.name}</DialogDescription>
                 </div>
               </div>
               <button onClick={() => setIsRequestOpen(false)} className="text-teal-900 hover:text-teal-950 transition-colors bg-white/40 rounded-full p-2 backdrop-blur-md border border-white/50 shadow-sm relative z-50 shrink-0">
@@ -345,35 +345,35 @@ export default function FeedbackTab() {
               </button>
             </div>
             
-            <div className="p-4 md:p-10 space-y-6 md:space-y-8 relative z-10">
+            <div className="p-4 md:p-10 space-y-6 md:space-y-8 relative z-10 w-full overflow-hidden">
               
               {/* General Qs */}
-              <div className="bg-white/40 backdrop-blur-md p-5 md:p-8 rounded-[1.5rem] md:rounded-[2rem] border-[1.5px] border-white/60 shadow-sm relative overflow-hidden group">
+              <div className="bg-white/40 backdrop-blur-md p-5 md:p-8 rounded-[1.5rem] md:rounded-[2rem] border-[1.5px] border-white/60 shadow-sm relative overflow-hidden group max-w-full">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-blue-400/10 rounded-full blur-[40px] pointer-events-none group-hover:scale-150 transition-transform duration-700"></div>
                 <h3 className="font-black text-base md:text-lg text-teal-950 mb-4 md:mb-6 flex items-center gap-2 md:gap-3 uppercase tracking-widest border-b-[1.5px] border-white/50 pb-3 md:pb-4 relative z-10"><Activity className="w-4 h-4 md:w-5 md:h-5 text-blue-600" /> General Health</h3>
                 
-                <div className="space-y-3 md:space-y-4 relative z-10">
+                <div className="space-y-3 md:space-y-4 relative z-10 max-w-full">
                   {questions.filter(q => q.category === 'general').map(q => (
-                    <div key={q.id} className="flex flex-col sm:flex-row gap-2 md:gap-3 items-start sm:items-center bg-white/50 p-3 rounded-xl md:rounded-[1.25rem] border border-white/70 shadow-sm w-full">
+                    <div key={q.id} className="flex flex-col sm:flex-row gap-2 md:gap-3 items-start sm:items-center bg-white/50 p-3 rounded-xl md:rounded-[1.25rem] border border-white/70 shadow-sm w-full max-w-full overflow-hidden">
                       <Badge className="bg-white/80 text-teal-950 border border-white/90 shadow-none px-3 py-1 uppercase tracking-widest text-[9px] shrink-0 w-full sm:w-20 justify-center">{q.type}</Badge>
-                      <Input value={q.text} onChange={(e) => setQuestions(questions.map(x => x.id === q.id ? {...x, text: e.target.value} : x))} className="h-10 bg-white/40 border-[1.5px] border-white/60 rounded-xl font-bold text-teal-950 focus:bg-white/80 transition-colors flex-1 w-full" />
+                      <Input value={q.text} onChange={(e) => setQuestions(questions.map(x => x.id === q.id ? {...x, text: e.target.value} : x))} className="h-10 bg-white/40 border-[1.5px] border-white/60 rounded-xl font-bold text-teal-950 focus:bg-white/80 transition-colors flex-1 w-full min-w-0" />
                       <Button size="icon" variant="ghost" className="h-10 w-full sm:w-10 shrink-0 bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 rounded-xl border border-rose-400/30" onClick={() => removeQuestion(q.id)}><Trash2 className="w-4 h-4" /></Button>
                     </div>
                   ))}
                 </div>
                 
-                <div className="flex flex-col sm:flex-row gap-3 mt-4 md:mt-6 pt-4 md:pt-6 border-t-[1.5px] border-white/50 items-center relative z-10 bg-white/20 p-3 md:p-4 rounded-xl md:rounded-[1.5rem]">
+                <div className="flex flex-col sm:flex-row gap-3 mt-4 md:mt-6 pt-4 md:pt-6 border-t-[1.5px] border-white/50 items-center relative z-10 bg-white/20 p-3 md:p-4 rounded-xl md:rounded-[1.5rem] w-full max-w-full">
                    <Select value={genNewType} onValueChange={setGenNewType}>
-                      <SelectTrigger className="w-full sm:w-[120px] h-12 bg-white/60 border-[1.5px] border-white/80 rounded-xl md:rounded-[1rem] font-black text-xs text-teal-950"><SelectValue /></SelectTrigger>
+                      <SelectTrigger className="w-full sm:w-[120px] h-12 bg-white/60 border-[1.5px] border-white/80 rounded-xl md:rounded-[1rem] font-black text-xs text-teal-950 shrink-0"><SelectValue /></SelectTrigger>
                       <SelectContent className="bg-white/90 backdrop-blur-xl border-white/80 rounded-2xl shadow-xl"><SelectItem value="scale" className="font-bold">Scale</SelectItem><SelectItem value="binary" className="font-bold">Yes/No</SelectItem><SelectItem value="text" className="font-bold">Text</SelectItem></SelectContent>
                    </Select>
-                   <Input placeholder="Type custom general question..." value={genNewText} onChange={e=>setGenNewText(e.target.value)} className="h-12 bg-white/60 border-[1.5px] border-white/80 rounded-xl md:rounded-[1rem] font-bold text-teal-950 placeholder:text-teal-900/40 w-full flex-1" />
-                   <Button variant="secondary" onClick={addGeneralQuestion} className="h-12 px-6 rounded-xl md:rounded-[1rem] bg-teal-500/20 hover:bg-teal-500/30 text-teal-950 font-black uppercase tracking-widest border border-teal-400/50 shadow-sm w-full sm:w-auto"><Plus className="w-4 h-4 mr-2"/> Add</Button>
+                   <Input placeholder="Type custom general question..." value={genNewText} onChange={e=>setGenNewText(e.target.value)} className="h-12 bg-white/60 border-[1.5px] border-white/80 rounded-xl md:rounded-[1rem] font-bold text-teal-950 placeholder:text-teal-900/40 w-full flex-1 min-w-0" />
+                   <Button variant="secondary" onClick={addGeneralQuestion} className="h-auto min-h-[3rem] px-6 py-2 rounded-xl md:rounded-[1rem] bg-teal-500/20 hover:bg-teal-500/30 text-teal-950 font-black uppercase tracking-widest border border-teal-400/50 shadow-sm w-full sm:w-auto shrink-0 whitespace-normal break-words"><Plus className="w-4 h-4 mr-2 inline"/> Add</Button>
                 </div>
               </div>
 
               {/* Therapy Qs */}
-              <div className="bg-white/40 backdrop-blur-md p-5 md:p-8 rounded-[1.5rem] md:rounded-[2rem] border-[1.5px] border-white/60 shadow-sm relative overflow-hidden group">
+              <div className="bg-white/40 backdrop-blur-md p-5 md:p-8 rounded-[1.5rem] md:rounded-[2rem] border-[1.5px] border-white/60 shadow-sm relative overflow-hidden group max-w-full">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-purple-400/10 rounded-full blur-[40px] pointer-events-none group-hover:scale-150 transition-transform duration-700"></div>
                 
                 <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-3 md:gap-4 mb-4 md:mb-6 border-b-[1.5px] border-white/50 pb-3 md:pb-4 relative z-10">
@@ -384,11 +384,11 @@ export default function FeedbackTab() {
                   </Select>
                 </div>
                 
-                <div className="space-y-3 md:space-y-4 relative z-10">
+                <div className="space-y-3 md:space-y-4 relative z-10 max-w-full">
                   {questions.filter(q => q.category === 'therapy').map(q => (
-                    <div key={q.id} className="flex flex-col sm:flex-row gap-2 md:gap-3 items-start sm:items-center bg-white/50 p-3 rounded-xl md:rounded-[1.25rem] border border-white/70 shadow-sm w-full">
+                    <div key={q.id} className="flex flex-col sm:flex-row gap-2 md:gap-3 items-start sm:items-center bg-white/50 p-3 rounded-xl md:rounded-[1.25rem] border border-white/70 shadow-sm w-full max-w-full overflow-hidden">
                       <Badge className="bg-purple-500/20 text-purple-950 border border-purple-400/50 shadow-none px-3 py-1 uppercase tracking-widest text-[9px] shrink-0 w-full sm:w-20 justify-center">{q.type}</Badge>
-                      <Input value={q.text} onChange={(e) => setQuestions(questions.map(x => x.id === q.id ? {...x, text: e.target.value} : x))} className="h-10 bg-white/40 border-[1.5px] border-white/60 rounded-xl font-bold text-teal-950 focus:bg-white/80 transition-colors flex-1 w-full" />
+                      <Input value={q.text} onChange={(e) => setQuestions(questions.map(x => x.id === q.id ? {...x, text: e.target.value} : x))} className="h-10 bg-white/40 border-[1.5px] border-white/60 rounded-xl font-bold text-teal-950 focus:bg-white/80 transition-colors flex-1 w-full min-w-0" />
                       <Button size="icon" variant="ghost" className="h-10 w-full sm:w-10 shrink-0 bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 rounded-xl border border-rose-400/30" onClick={() => removeQuestion(q.id)}><Trash2 className="w-4 h-4" /></Button>
                     </div>
                   ))}
@@ -398,19 +398,19 @@ export default function FeedbackTab() {
                 </div>
                 
                 {selectedTherapy && (
-                    <div className="flex flex-col sm:flex-row gap-3 mt-4 md:mt-6 pt-4 md:pt-6 border-t-[1.5px] border-white/50 items-center relative z-10 bg-white/20 p-3 md:p-4 rounded-xl md:rounded-[1.5rem]">
+                    <div className="flex flex-col sm:flex-row gap-3 mt-4 md:mt-6 pt-4 md:pt-6 border-t-[1.5px] border-white/50 items-center relative z-10 bg-white/20 p-3 md:p-4 rounded-xl md:rounded-[1.5rem] w-full max-w-full">
                       <Select value={thNewType} onValueChange={setThNewType}>
-                        <SelectTrigger className="w-full sm:w-[120px] h-12 bg-white/60 border-[1.5px] border-white/80 rounded-xl md:rounded-[1rem] font-black text-xs text-teal-950"><SelectValue /></SelectTrigger>
+                        <SelectTrigger className="w-full sm:w-[120px] h-12 bg-white/60 border-[1.5px] border-white/80 rounded-xl md:rounded-[1rem] font-black text-xs text-teal-950 shrink-0"><SelectValue /></SelectTrigger>
                         <SelectContent className="bg-white/90 backdrop-blur-xl border-white/80 rounded-2xl shadow-xl"><SelectItem value="scale" className="font-bold">Scale</SelectItem><SelectItem value="binary" className="font-bold">Yes/No</SelectItem><SelectItem value="text" className="font-bold">Text</SelectItem></SelectContent>
                       </Select>
-                      <Input placeholder={`Type custom ${selectedTherapy} question...`} value={thNewText} onChange={e=>setThNewText(e.target.value)} className="h-12 bg-white/60 border-[1.5px] border-white/80 rounded-xl md:rounded-[1rem] font-bold text-teal-950 placeholder:text-teal-900/40 flex-1 w-full" />
-                      <Button variant="secondary" onClick={addTherapyQuestion} className="h-12 px-6 rounded-xl md:rounded-[1rem] bg-purple-500/20 hover:bg-purple-500/30 text-purple-950 font-black uppercase tracking-widest border border-purple-400/50 shadow-sm w-full sm:w-auto"><Plus className="w-4 h-4 mr-2"/> Add</Button>
+                      <Input placeholder={`Type custom ${selectedTherapy} question...`} value={thNewText} onChange={e=>setThNewText(e.target.value)} className="h-12 bg-white/60 border-[1.5px] border-white/80 rounded-xl md:rounded-[1rem] font-bold text-teal-950 placeholder:text-teal-900/40 flex-1 w-full min-w-0" />
+                      <Button variant="secondary" onClick={addTherapyQuestion} className="h-auto min-h-[3rem] px-6 py-2 rounded-xl md:rounded-[1rem] bg-purple-500/20 hover:bg-purple-500/30 text-purple-950 font-black uppercase tracking-widest border border-purple-400/50 shadow-sm w-full sm:w-auto shrink-0 whitespace-normal break-words"><Plus className="w-4 h-4 mr-2 inline"/> Add</Button>
                     </div>
                 )}
               </div>
             </div>
             
-            <div className="p-4 md:p-8 bg-white/20 border-t-[1.5px] border-white/40 flex flex-col sm:flex-row justify-end gap-3 md:gap-4">
+            <div className="p-4 md:p-8 bg-white/20 border-t-[1.5px] border-white/40 flex flex-col sm:flex-row justify-end gap-3 md:gap-4 w-full">
                <Button onClick={() => setIsRequestOpen(false)} variant="outline" className="w-full sm:w-auto bg-white/50 hover:bg-white/70 border-[1.5px] border-white/80 text-teal-950 shadow-sm h-12 md:h-14 px-6 md:px-8 rounded-full font-black uppercase tracking-widest transition-all">Cancel</Button>
                <Button onClick={sendRequest} className="w-full sm:w-auto bg-gradient-to-r from-teal-600 to-emerald-500 hover:from-teal-500 hover:to-emerald-400 text-white shadow-[0_8px_20px_rgba(20,184,166,0.3)] h-12 md:h-14 px-8 md:px-10 rounded-full font-black uppercase tracking-widest transition-all hover:scale-[1.02] hover:-translate-y-0.5"><Send className="w-4 h-4 md:w-5 md:h-5 mr-2" /> Send Request</Button>
             </div>
@@ -426,13 +426,13 @@ export default function FeedbackTab() {
             <div className="p-6 md:p-10 border-b border-white/30 flex items-center justify-between gap-4 md:gap-6 relative overflow-hidden bg-white/10" style={{ background: 'linear-gradient(135deg, rgba(20,184,166,0.2) 0%, rgba(255,255,255,0.05) 100%)' }}>
               <div className="absolute top-0 right-0 w-64 h-64 bg-teal-400/20 rounded-full blur-[60px] pointer-events-none -z-10"></div>
               
-              <div className="flex items-center gap-3 md:gap-4 relative z-10">
+              <div className="flex items-center gap-3 md:gap-4 relative z-10 w-full min-w-0">
                 <div className="w-10 h-10 md:w-14 md:h-14 bg-white/40 backdrop-blur-md rounded-xl md:rounded-2xl border-[1.5px] border-white/70 shadow-sm flex items-center justify-center shrink-0">
                   <History className="w-5 h-5 md:w-6 md:h-6 text-teal-800 drop-shadow-sm" />
                 </div>
-                <div>
-                  <DialogTitle className="text-xl md:text-3xl font-black text-teal-950 tracking-tight leading-none mb-1 drop-shadow-sm">History</DialogTitle>
-                  <DialogDescription className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-teal-900/60">For {selectedPatient?.patient?.name}</DialogDescription>
+                <div className="min-w-0 flex-1">
+                  <DialogTitle className="text-xl md:text-3xl font-black text-teal-950 tracking-tight leading-none mb-1 drop-shadow-sm truncate">History</DialogTitle>
+                  <DialogDescription className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-teal-900/60 truncate">For {selectedPatient?.patient?.name}</DialogDescription>
                 </div>
               </div>
               <button onClick={() => setIsHistoryOpen(false)} className="text-teal-900 hover:text-teal-950 transition-colors bg-white/40 rounded-full p-2 backdrop-blur-md border border-white/50 shadow-sm relative z-50 shrink-0">
@@ -440,26 +440,26 @@ export default function FeedbackTab() {
               </button>
             </div>
             
-            <div className="p-4 md:p-10 space-y-4 md:space-y-6 relative z-10">
+            <div className="p-4 md:p-10 space-y-4 md:space-y-6 relative z-10 w-full overflow-hidden">
               {patientHistory.length === 0 ? (
-                <div className="flex flex-col items-center justify-center py-10 md:py-16 bg-white/30 backdrop-blur-md rounded-[1.5rem] md:rounded-[2rem] border-[1.5px] border-white/50 shadow-inner">
+                <div className="flex flex-col items-center justify-center py-10 md:py-16 bg-white/30 backdrop-blur-md rounded-[1.5rem] md:rounded-[2rem] border-[1.5px] border-white/50 shadow-inner w-full">
                    <div className="w-12 h-12 md:w-16 md:h-16 bg-white/50 rounded-full flex items-center justify-center mb-3 md:mb-4 shadow-sm border border-white/70">
                      <History className="w-6 h-6 md:w-8 md:h-8 text-teal-600/50" />
                    </div>
                    <p className="text-base md:text-lg font-black text-teal-950">No History Found</p>
-                   <p className="text-[9px] md:text-[10px] font-bold text-teal-900/60 uppercase tracking-widest mt-1 text-center">Patient hasn't submitted feedback yet.</p>
+                   <p className="text-[9px] md:text-[10px] font-bold text-teal-900/60 uppercase tracking-widest mt-1 text-center px-4">Patient hasn't submitted feedback yet.</p>
                 </div>
               ) : patientHistory.map(sess => (
-                <div key={sess._id} className="bg-white/40 backdrop-blur-md border-[1.5px] border-white/60 shadow-[0_4px_20px_rgba(0,0,0,0.03)] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden group hover:bg-white/50 transition-colors">
+                <div key={sess._id} className="bg-white/40 backdrop-blur-md border-[1.5px] border-white/60 shadow-[0_4px_20px_rgba(0,0,0,0.03)] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden group hover:bg-white/50 transition-colors w-full">
                    <div className="bg-white/30 px-4 md:px-6 py-3 md:py-4 border-b border-white/50 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 relative z-10">
-                      <span className="font-black text-xs md:text-sm text-teal-950 flex items-center gap-2"><Calendar className="w-3.5 h-3.5 md:w-4 md:h-4 text-teal-700"/> {new Date(sess.respondedAt).toLocaleDateString("en-IN", { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' })}</span>
-                      <Badge className="bg-emerald-500/20 text-emerald-950 border border-emerald-400/50 shadow-none px-2 md:px-3 py-1 uppercase tracking-widest text-[8px] md:text-[9px] flex items-center gap-1.5 w-fit"><CheckCircle2 className="w-3 h-3"/> Completed</Badge>
+                      <span className="font-black text-xs md:text-sm text-teal-950 flex items-center gap-2 truncate"><Calendar className="w-3.5 h-3.5 md:w-4 md:h-4 text-teal-700 shrink-0"/> {new Date(sess.respondedAt).toLocaleDateString("en-IN", { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' })}</span>
+                      <Badge className="bg-emerald-500/20 text-emerald-950 border border-emerald-400/50 shadow-none px-2 md:px-3 py-1 uppercase tracking-widest text-[8px] md:text-[9px] flex items-center gap-1.5 w-fit shrink-0"><CheckCircle2 className="w-3 h-3"/> Completed</Badge>
                    </div>
-                   <div className="p-4 md:p-6 space-y-3 md:space-y-4 relative z-10">
+                   <div className="p-4 md:p-6 space-y-3 md:space-y-4 relative z-10 w-full">
                       {sess.questions.map((q, i) => (
-                         <div key={i} className="flex flex-col sm:flex-row justify-between sm:items-start gap-3 p-3 md:p-4 rounded-xl md:rounded-2xl bg-white/30 border border-white/50 shadow-sm w-full">
-                            <span className="text-xs md:text-sm font-bold text-teal-950 leading-relaxed flex-1 w-full">{q.text}</span>
-                            <div className="px-3 md:px-4 py-1.5 rounded-lg md:rounded-xl bg-white/60 border border-white/80 font-black text-teal-950 text-xs md:text-sm shadow-sm whitespace-nowrap w-fit">
+                         <div key={i} className="flex flex-col sm:flex-row justify-between sm:items-start gap-3 p-3 md:p-4 rounded-xl md:rounded-2xl bg-white/30 border border-white/50 shadow-sm w-full max-w-full overflow-hidden">
+                            <span className="text-xs md:text-sm font-bold text-teal-950 leading-relaxed flex-1 w-full min-w-0 break-words">{q.text}</span>
+                            <div className="px-3 md:px-4 py-1.5 rounded-lg md:rounded-xl bg-white/60 border border-white/80 font-black text-teal-950 text-xs md:text-sm shadow-sm whitespace-nowrap w-fit shrink-0">
                               {String(q.answer)}
                             </div>
                          </div>
@@ -472,7 +472,7 @@ export default function FeedbackTab() {
         </DialogContent>
       </Dialog>
 
-      {/* --- MODAL 3: TEMPLATES (FIXED FOR MOBILE RESPONSIVENESS) --- */}
+      {/* --- MODAL 3: TEMPLATES (FIXED FOR HORIZONTAL OVERFLOW ON MOBILE) --- */}
       <Dialog open={isTemplateOpen} onOpenChange={setIsTemplateOpen}>
         <DialogContent className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] max-w-5xl w-[95vw] md:w-[90vw] max-h-[90vh] overflow-y-auto overflow-x-hidden p-0 bg-white/30 backdrop-blur-[50px] border-[1.5px] border-white/60 shadow-[0_30px_80px_rgba(0,0,0,0.3)] rounded-[2rem] md:rounded-[3rem] [&::-webkit-scrollbar]:hidden z-[100] [&>button]:hidden">
           
@@ -480,13 +480,13 @@ export default function FeedbackTab() {
             <div className="p-6 md:p-10 border-b border-white/30 flex items-center justify-between gap-4 md:gap-6 relative overflow-hidden bg-white/10" style={{ background: 'linear-gradient(135deg, rgba(20,184,166,0.2) 0%, rgba(255,255,255,0.05) 100%)' }}>
               <div className="absolute top-0 right-0 w-64 h-64 bg-teal-400/20 rounded-full blur-[60px] pointer-events-none -z-10"></div>
               
-              <div className="flex items-center gap-3 md:gap-4 relative z-10">
+              <div className="flex items-center gap-3 md:gap-4 relative z-10 w-full min-w-0">
                 <div className="w-10 h-10 md:w-14 md:h-14 bg-white/40 backdrop-blur-md rounded-xl md:rounded-2xl border-[1.5px] border-white/70 shadow-sm flex items-center justify-center shrink-0">
                   <Settings className="w-5 h-5 md:w-6 md:h-6 text-teal-800 drop-shadow-sm" />
                 </div>
-                <div>
-                  <DialogTitle className="text-xl md:text-3xl font-black text-teal-950 tracking-tight leading-none mb-1 drop-shadow-sm">Templates</DialogTitle>
-                  <DialogDescription className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-teal-900/60 hidden sm:block">Configure default questions for all patients</DialogDescription>
+                <div className="min-w-0 flex-1">
+                  <DialogTitle className="text-xl md:text-3xl font-black text-teal-950 tracking-tight leading-none mb-1 drop-shadow-sm truncate">Templates</DialogTitle>
+                  <DialogDescription className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-teal-900/60 hidden sm:block truncate">Configure default questions for all patients</DialogDescription>
                 </div>
               </div>
               <button onClick={() => setIsTemplateOpen(false)} className="text-teal-900 hover:text-teal-950 transition-colors bg-white/40 rounded-full p-2 backdrop-blur-md border border-white/50 shadow-sm relative z-50 shrink-0">
@@ -494,8 +494,8 @@ export default function FeedbackTab() {
               </button>
             </div>
             
-            <div className="p-4 md:p-10 relative z-10">
-              <Tabs defaultValue="general" className="w-full flex flex-col">
+            <div className="p-4 md:p-10 relative z-10 w-full overflow-hidden">
+              <Tabs defaultValue="general" className="w-full flex flex-col max-w-full">
                 <TabsList className="flex flex-col sm:flex-row w-full max-w-md mx-auto bg-white/30 backdrop-blur-xl p-1.5 rounded-2xl sm:rounded-full mb-6 md:mb-10 border-[1.5px] border-white/60 shadow-[0_8px_30px_rgba(0,0,0,0.05)] h-auto sm:h-14">
                   <TabsTrigger value="general" className="w-full sm:flex-1 py-3 sm:py-0 rounded-xl sm:rounded-full font-black text-[10px] sm:text-sm uppercase tracking-widest data-[state=active]:bg-gradient-to-r data-[state=active]:from-teal-500 data-[state=active]:to-teal-400 data-[state=active]:text-white data-[state=active]:shadow-md transition-all text-teal-900/60 h-full">
                     General Health
@@ -505,43 +505,42 @@ export default function FeedbackTab() {
                   </TabsTrigger>
                 </TabsList>
                 
-                <TabsContent value="general" className="mt-0">
-                  <div className="bg-white/40 backdrop-blur-md p-5 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] border-[1.5px] border-white/60 shadow-sm">
-                     <div className="space-y-3 md:space-y-4 mb-5 md:mb-6">
+                <TabsContent value="general" className="mt-0 w-full max-w-full">
+                  <div className="bg-white/40 backdrop-blur-md p-5 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] border-[1.5px] border-white/60 shadow-sm w-full max-w-full overflow-hidden">
+                     <div className="space-y-3 md:space-y-4 mb-5 md:mb-6 w-full max-w-full">
                         {globalGeneral.map((q, idx) => (
-                           <div key={idx} className="flex flex-col sm:flex-row gap-2 md:gap-3 items-start sm:items-center bg-white/50 p-3 rounded-xl md:rounded-[1.25rem] border border-white/70 shadow-sm w-full">
+                           <div key={idx} className="flex flex-col sm:flex-row gap-2 md:gap-3 items-start sm:items-center bg-white/50 p-3 rounded-xl md:rounded-[1.25rem] border border-white/70 shadow-sm w-full max-w-full overflow-hidden">
                               <Badge className="bg-white/80 text-teal-950 border border-white/90 shadow-none px-3 md:px-4 py-1.5 md:py-2 uppercase tracking-widest text-[9px] md:text-[10px] shrink-0 w-full sm:w-24 justify-center">{q.type}</Badge>
-                              <Input value={q.text} onChange={(e) => updateGlobalGen(idx, 'text', e.target.value)} className="h-10 md:h-12 bg-white/40 border-[1.5px] border-white/60 rounded-xl font-bold text-teal-950 focus:bg-white/80 transition-colors flex-1 w-full text-sm md:text-base" />
+                              <Input value={q.text} onChange={(e) => updateGlobalGen(idx, 'text', e.target.value)} className="h-10 md:h-12 bg-white/40 border-[1.5px] border-white/60 rounded-xl font-bold text-teal-950 focus:bg-white/80 transition-colors flex-1 w-full min-w-0 text-sm md:text-base" />
                               <Button size="icon" variant="ghost" className="h-10 md:h-12 w-full sm:w-12 shrink-0 bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 rounded-xl border border-rose-400/30" onClick={() => setGlobalGeneral(globalGeneral.filter((_, i) => i !== idx))}><Trash2 className="w-4 h-4 md:w-5 md:h-5" /></Button>
                            </div>
                         ))}
                      </div>
-                     <Button variant="secondary" onClick={addGlobalGen} className="w-full h-12 md:h-14 rounded-xl md:rounded-[1.25rem] bg-teal-500/20 hover:bg-teal-500/30 text-teal-950 font-black text-xs md:text-sm uppercase tracking-widest border-[1.5px] border-teal-400/50 shadow-sm transition-all border-dashed"><Plus className="w-4 h-4 md:w-5 md:h-5 mr-2"/> Add General Question</Button>
+                     <Button variant="secondary" onClick={addGlobalGen} className="w-full h-auto min-h-[3rem] md:min-h-[3.5rem] py-2 rounded-xl md:rounded-[1.25rem] bg-teal-500/20 hover:bg-teal-500/30 text-teal-950 font-black text-xs md:text-sm uppercase tracking-widest border-[1.5px] border-teal-400/50 shadow-sm transition-all border-dashed whitespace-normal break-words flex items-center justify-center"><Plus className="w-4 h-4 md:w-5 md:h-5 mr-2 shrink-0"/> Add General Question</Button>
                   </div>
                 </TabsContent>
                 
-                <TabsContent value="therapy" className="mt-0 w-full">
-                  <div className="bg-white/40 backdrop-blur-md p-4 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] border-[1.5px] border-white/60 shadow-sm w-full">
-                     <Tabs defaultValue="Vamana" className="w-full flex flex-col md:flex-row gap-4 md:gap-8">
+                <TabsContent value="therapy" className="mt-0 w-full max-w-full">
+                  <div className="bg-white/40 backdrop-blur-md p-4 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] border-[1.5px] border-white/60 shadow-sm w-full max-w-full overflow-hidden">
+                     <Tabs defaultValue="Vamana" className="w-full flex flex-col md:flex-row gap-4 md:gap-8 max-w-full">
                         
-                        {/* 🚨 CHANGED HERE: Made TabList wrap nicely on mobile */}
-                        <TabsList className="flex flex-row md:flex-col h-auto w-full md:w-56 bg-white/30 backdrop-blur-md p-2 rounded-2xl md:rounded-[1.5rem] border-[1.5px] border-white/50 shadow-inner gap-2 overflow-x-auto flex-nowrap md:flex-wrap pb-3 md:pb-2 scrollbar-hide">
+                        <TabsList className="flex flex-row md:flex-col h-auto w-full max-w-full md:w-56 bg-white/30 backdrop-blur-md p-2 rounded-2xl md:rounded-[1.5rem] border-[1.5px] border-white/50 shadow-inner gap-2 overflow-x-auto flex-nowrap pb-3 md:pb-2 scrollbar-hide shrink-0">
                            {THERAPY_TYPES.map(t => 
-                             <TabsTrigger key={t} value={t} className="w-fit md:w-full justify-center md:justify-start px-4 md:px-5 py-2.5 md:py-4 rounded-xl font-black text-[10px] md:text-xs uppercase tracking-widest data-[state=active]:bg-white/80 data-[state=active]:text-teal-950 data-[state=active]:shadow-sm text-teal-900/60 transition-all border-[1.5px] border-transparent data-[state=active]:border-white/90 whitespace-nowrap">
+                             <TabsTrigger key={t} value={t} className="w-fit md:w-full justify-center md:justify-start px-4 md:px-5 py-2.5 md:py-4 rounded-xl font-black text-[10px] md:text-xs uppercase tracking-widest data-[state=active]:bg-white/80 data-[state=active]:text-teal-950 data-[state=active]:shadow-sm text-teal-900/60 transition-all border-[1.5px] border-transparent data-[state=active]:border-white/90 whitespace-nowrap shrink-0">
                                {t}
                              </TabsTrigger>
                            )}
                         </TabsList>
                         
-                        <div className="flex-1 w-full min-w-0">
+                        <div className="flex-1 w-full min-w-0 max-w-full">
                           {THERAPY_TYPES.map(t => (
-                             <TabsContent key={t} value={t} className="space-y-4 md:space-y-6 mt-0 w-full">
-                                <h3 className="font-black text-lg md:text-xl text-teal-950 drop-shadow-sm mb-3 md:mb-4 border-b-[1.5px] border-white/50 pb-2 md:pb-4">{t} Questions</h3>
-                                <div className="space-y-3 md:space-y-4 mb-4 md:mb-6 w-full">
+                             <TabsContent key={t} value={t} className="space-y-4 md:space-y-6 mt-0 w-full max-w-full">
+                                <h3 className="font-black text-lg md:text-xl text-teal-950 drop-shadow-sm mb-3 md:mb-4 border-b-[1.5px] border-white/50 pb-2 md:pb-4 truncate">{t} Questions</h3>
+                                <div className="space-y-3 md:space-y-4 mb-4 md:mb-6 w-full max-w-full">
                                   {(globalTherapy[t] || []).map((q, idx) => (
-                                     <div key={idx} className="flex flex-col sm:flex-row gap-2 md:gap-3 items-start sm:items-center bg-white/50 p-3 rounded-xl md:rounded-[1.25rem] border border-white/70 shadow-sm w-full">
+                                     <div key={idx} className="flex flex-col sm:flex-row gap-2 md:gap-3 items-start sm:items-center bg-white/50 p-3 rounded-xl md:rounded-[1.25rem] border border-white/70 shadow-sm w-full max-w-full overflow-hidden">
                                         <Badge className="bg-white/80 text-teal-950 border border-white/90 shadow-none px-3 md:px-4 py-1.5 md:py-2 uppercase tracking-widest text-[9px] md:text-[10px] shrink-0 w-full sm:w-24 justify-center">{q.type}</Badge>
-                                        <Input value={q.text} onChange={(e) => { const n=[...(globalTherapy[t]||[])]; n[idx].text=e.target.value; setGlobalTherapy({...globalTherapy,[t]:n}); }} className="h-10 md:h-12 bg-white/40 border-[1.5px] border-white/60 rounded-xl font-bold text-teal-950 focus:bg-white/80 transition-colors flex-1 w-full text-sm md:text-base" />
+                                        <Input value={q.text} onChange={(e) => { const n=[...(globalTherapy[t]||[])]; n[idx].text=e.target.value; setGlobalTherapy({...globalTherapy,[t]:n}); }} className="h-10 md:h-12 bg-white/40 border-[1.5px] border-white/60 rounded-xl font-bold text-teal-950 focus:bg-white/80 transition-colors flex-1 w-full min-w-0 text-sm md:text-base" />
                                         <Button size="icon" variant="ghost" className="h-10 md:h-12 w-full sm:w-12 shrink-0 bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 rounded-xl border border-rose-400/30" onClick={() => { const n=(globalTherapy[t]||[]).filter((_,i)=>i!==idx); setGlobalTherapy({...globalTherapy,[t]:n}); }}><Trash2 className="w-4 h-4 md:w-5 md:h-5" /></Button>
                                      </div>
                                   ))}
@@ -549,7 +548,7 @@ export default function FeedbackTab() {
                                     <div className="text-center py-6 md:py-10 text-teal-900/50 text-[10px] md:text-xs font-bold uppercase tracking-widest bg-white/30 rounded-xl md:rounded-[1.5rem] border-[2px] border-dashed border-white/60">No template questions for {t}.</div>
                                   )}
                                 </div>
-                                <Button variant="secondary" onClick={() => { const n=[...(globalTherapy[t]||[]), {type:'scale',text:'New Question'}]; setGlobalTherapy({...globalTherapy,[t]:n}); }} className="w-full h-12 md:h-14 rounded-xl md:rounded-[1.25rem] bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-950 font-black text-xs md:text-sm uppercase tracking-widest border-[1.5px] border-indigo-400/30 shadow-sm transition-all border-dashed"><Plus className="w-4 h-4 md:w-5 md:h-5 mr-2"/> Add to {t}</Button>
+                                <Button variant="secondary" onClick={() => { const n=[...(globalTherapy[t]||[]), {type:'scale',text:'New Question'}]; setGlobalTherapy({...globalTherapy,[t]:n}); }} className="w-full h-auto min-h-[3rem] md:min-h-[3.5rem] py-3 rounded-xl md:rounded-[1.25rem] bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-950 font-black text-xs md:text-sm uppercase tracking-widest border-[1.5px] border-indigo-400/30 shadow-sm transition-all border-dashed whitespace-normal break-words flex items-center justify-center"><Plus className="w-4 h-4 md:w-5 md:h-5 mr-2 shrink-0"/> Add to {t}</Button>
                              </TabsContent>
                           ))}
                         </div>
@@ -559,7 +558,7 @@ export default function FeedbackTab() {
               </Tabs>
             </div>
             
-            <div className="p-4 md:p-8 bg-white/20 border-t-[1.5px] border-white/40 flex flex-col sm:flex-row justify-end gap-3 md:gap-4">
+            <div className="p-4 md:p-8 bg-white/20 border-t-[1.5px] border-white/40 flex flex-col sm:flex-row justify-end gap-3 md:gap-4 w-full">
                <Button onClick={() => setIsTemplateOpen(false)} variant="outline" className="w-full sm:w-auto bg-white/50 hover:bg-white/70 border-[1.5px] border-white/80 text-teal-950 shadow-sm h-12 md:h-14 px-6 md:px-8 rounded-full font-black uppercase tracking-widest transition-all">Cancel</Button>
                <Button onClick={saveGlobalTemplates} className="w-full sm:w-auto bg-gradient-to-r from-teal-600 to-emerald-500 hover:from-teal-500 hover:to-emerald-400 text-white shadow-[0_8px_20px_rgba(20,184,166,0.3)] h-12 md:h-14 px-8 md:px-10 rounded-full font-black uppercase tracking-widest transition-all hover:scale-[1.02] hover:-translate-y-0.5"><Save className="w-4 h-4 md:w-5 md:h-5 mr-2" /> Save Templates</Button>
             </div>
